@@ -1,8 +1,8 @@
 import slugify from 'limax';
 
-import { SITE, APP_BLOG } from 'astrowind:config';
+import { APP_BLOG, SITE } from 'astrowind:config';
 
-import { trim } from '~/utils/utils';
+import { trim } from '@/utils/utils';
 
 export const trimSlash = (s: string) => trim(trim(s, '/'));
 const createPath = (...params: string[]) => {
