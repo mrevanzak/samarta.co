@@ -1,22 +1,22 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: Samarta.co
+  site: 'https://samarta.pages.dev'
   base: '/'
   trailingSlash: false
 
-  googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
+  # googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
 
 # Default SEO metadata
 metadata:
   title:
-    default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    default: Samarta.co
+    template: 'Samarta.co — %s'
+  description: "\U0001F680 PT Swakarya Mandiri Amerta (SAMARTA) is a company that focuses on the development of renewable energy and energy efficiency in Indonesia. We are committed to providing the best solutions for our clients in the field of renewable energy and energy efficiency."
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
+    site_name: Samarta.co
     images:
       - url: '@/assets/images/default.png'
         width: 1200
@@ -42,9 +42,9 @@ apps:
       robots:
         index: true
 
-    list:
+    project:
       isEnabled: true
-      pathname: 'blog' # Blog main path, you can change this to "articles" (/articles)
+      pathname: 'project' # Blog main path, you can change this to "articles" (/articles)
       robots:
         index: true
 
