@@ -7,11 +7,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: 'var(--aw-color-primary)',
+        primary: 'rgb(var(--aw-color-primary))',
         secondary: 'var(--aw-color-secondary)',
         accent: 'var(--aw-color-accent)',
         default: 'var(--aw-color-text-default)',
         muted: 'var(--aw-color-text-muted)',
+        'broken-white': 'rgb(var(--aw-color-broken-white))',
+        black: 'rgb(var(--aw-color-black))',
       },
       fontFamily: {
         logo: ['Creato Display'],

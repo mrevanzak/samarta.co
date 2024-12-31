@@ -7,22 +7,30 @@ export interface Props {
   label?: string;
   class?: string;
   iconClass?: string;
-  iconName?: string;
 }
 
 const {
   label = 'Toggle between Dark and Light mode',
   class:
-    className = 'text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center',
+    className = 'text-broken-white rounded-full text-sm px-4 py-2 inline-flex items-center hover:bg-primary/20 dark:hover:bg-primary/20 transition ease-in duration-200',
   iconClass = 'w-6 h-6',
-  iconName = 'tabler:sun',
 } = Astro.props;
 ---
 
 {
   !(UI.theme && UI.theme.endsWith(':only')) && (
-    <button type="button" class={className} aria-label={label} data-aw-toggle-color-scheme>
-      <Icon name={iconName} class={iconClass} />
-    </button>
+    <div class="gap-2 flex">
+      <button
+        type="button"
+        class:list={[className, 'bg-primary dark:bg-transparent']}
+        aria-label={label}
+        data-apply-light-theme
+      >
+        <Icon name="tabler:sun-filled" class={iconClass} />
+      </button>
+      <button type="button" class:list={[className, 'dark:bg-primary']} aria-label={label} data-apply-dark-theme>
+        <Icon name="tabler:moon-filled" class={iconClass} />
+      </button>
+    </div>
   )
 }

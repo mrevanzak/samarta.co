@@ -1,5 +1,5 @@
 site:
-  name: Samarta.co
+  name: Samarta
   site: 'https://samarta.pages.dev'
   base: '/'
   trailingSlash: false
