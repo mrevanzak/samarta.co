@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { getAsset } from '@/utils/permalinks';
 import { AstroFont } from 'astro-font';
 
-const fontPrefix = import.meta.env.PROD ? Astro.site!.toString() : join(process.cwd(), 'public');
+const fontPrefix = import.meta.env.PROD ? '/' : join(process.cwd(), 'public');
 ---
 
 <meta charset="UTF-8" />
