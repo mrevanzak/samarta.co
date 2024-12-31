@@ -25,7 +25,7 @@ export const PROJECT_BASE = cleanSlug(APP_BLOG?.project?.pathname);
 export const CATEGORY_BASE = cleanSlug(APP_BLOG?.category?.pathname);
 export const TAG_BASE = cleanSlug(APP_BLOG?.tag?.pathname) || 'tag';
 
-export const POST_PERMALINK_PATTERN = trimSlash(APP_BLOG?.post?.permalink || `${BLOG_BASE}/%slug%`);
+export const POST_PERMALINK_PATTERN = trimSlash(APP_BLOG?.post?.permalink || `${PROJECT_BASE}/%slug%`);
 
 /** */
 export const getCanonical = (path = ''): string | URL => {
