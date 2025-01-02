@@ -46,8 +46,8 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 
 <header
   class:list={[
-    { sticky: isSticky, relative: !isSticky, dark: isDark },
-    'top-0 z-40 mx-auto w-full flex-none border-b border-gray-50/0 transition-[opacity] ease-in-out',
+    { relative: !isSticky, dark: isDark },
+    'fixed top-0 z-40 mx-auto w-full flex-none border-b border-gray-50/0 transition-[opacity] ease-in-out',
   ]}
   {...isSticky ? { 'data-aw-sticky-header': true } : {}}
   {...id ? { id } : {}}
@@ -69,7 +69,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         <ToggleMenu />
       </div>
     </div>
-    <div class="flex flex-1 justify-between md:p-4 md:rounded-full md:bg-black 2xl:p-2.5">
+    <div class="flex flex-1 justify-between md:rounded-full md:bg-black md:p-4 2xl:p-2.5">
       <nav
         class="hidden overflow-y-auto overflow-x-hidden text-default md:flex md:w-auto md:justify-self-center md:overflow-x-auto md:overflow-y-visible md:text-broken-white"
         aria-label="Main navigation"

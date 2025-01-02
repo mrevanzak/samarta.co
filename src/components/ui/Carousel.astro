@@ -1,0 +1,135 @@
+---
+import Image from '@/components/common/Image.astro';
+import type { Image as ImageType } from '@/types';
+
+type Props = {
+  images?: ImageType[];
+};
+
+const { images } = Astro.props;
+---
+
+<div class="embla">
+  <div class="embla__viewport">
+    <div class="embla__container">
+      {
+        images &&
+          images.map((image) => (
+            <div class="embla__slide">
+              <Image class="h-screen" {...image} />
+            </div>
+          ))
+      }
+    </div>
+  </div>
+  <div class:list={['absolute bottom-[10%] left-0 z-10 flex w-full items-center justify-center gap-2', 'embla__dots']}>
+    {
+      images &&
+        Array.from({ length: images.length }).map((_, index) => (
+          <button
+            type="button"
+            class:list={[
+              'h-3 w-3 rounded-full bg-black transition-all duration-300 ease-in-out',
+              'embla__dot',
+            ]}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))
+    }
+  </div>
+</div>
+
+<style>
+  .embla {
+    position: relative;
+    --slide-spacing: 1rem;
+    --slide-size: 100%;
+  }
+
+  .embla__viewport {
+    overflow: hidden;
+  }
+
+  .embla__container {
+    backface-visibility: hidden;
+    display: flex;
+    touch-action: pan-y pinch-zoom;
+    margin-left: calc(var(--slide-spacing) * -1);
+  }
+
+  .embla__slide {
+    transform: translate3d(0, 0, 0);
+    flex: 0 0 var(--slide-size);
+    min-width: 0;
+    padding-left: var(--slide-spacing);
+  }
+
+  .content {
+    position: relative;
+
+    & img {
+      -webkit-user-drag: none;
+    }
+  }
+</style>
+
+<script>
+  import EmblaCarousel, { type EmblaCarouselType, type EmblaOptionsType } from 'embla-carousel';
+  import Autoplay from 'embla-carousel-autoplay';
+  import Fade from 'embla-carousel-fade';
+
+  const options: EmblaOptionsType = {
+    loop: true,
+  };
+
+  const emblaNode = document.querySelector<HTMLElement>('.embla')!;
+  const viewportNode = emblaNode.querySelector<HTMLElement>('.embla__viewport')!;
+  const dotsNode = document.querySelector<HTMLElement>('.embla__dots')!;
+  const emblaApi = EmblaCarousel(viewportNode, options, [
+    Autoplay({
+      delay: 5000,
+    }),
+    Fade(),
+  ]);
+
+  const addDotBtnsAndClickHandlers = (emblaApi: EmblaCarouselType, dotsNode: HTMLElement) => {
+    let dotNodes: HTMLElement[] = [];
+
+    const addDotBtnsWithClickHandlers = (): void => {
+      const scrollTo = (index: number): void => {
+        emblaApi.scrollTo(index);
+      };
+
+      dotNodes = Array.from(dotsNode.querySelectorAll('.embla__dot'));
+      dotNodes.forEach((dotNode, index) => {
+        dotNode.addEventListener('click', () => scrollTo(index), false);
+      });
+    };
+
+    const toggleDotBtnsActive = (): void => {
+      const previous = emblaApi.previousScrollSnap();
+      const selected = emblaApi.selectedScrollSnap();
+      // selected dots class
+      dotNodes[selected].classList.add('w-9', 'bg-primary');
+      if (previous === selected) return;
+      dotNodes[selected].classList.remove('bg-black');
+      
+      // unselected dots class
+      dotNodes[previous].classList.add('bg-black');
+      dotNodes[previous].classList.remove('w-9', 'bg-primary');
+    };
+
+    emblaApi
+      .on('init', addDotBtnsWithClickHandlers)
+      .on('reInit', addDotBtnsWithClickHandlers)
+      .on('init', toggleDotBtnsActive)
+      .on('reInit', toggleDotBtnsActive)
+      .on('select', toggleDotBtnsActive);
+
+    return () => {};
+  };
+
+  const removeDotBtnsAndClickHandlers = addDotBtnsAndClickHandlers(emblaApi, dotsNode);
+
+  emblaApi.on('destroy', removeDotBtnsAndClickHandlers);
+</script>
