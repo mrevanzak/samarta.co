@@ -18,6 +18,7 @@ export default {
       fontFamily: {
         logo: ['Creato Display'],
         primary: ['var(--aw-font-sans, ui-sans-serif)', ...defaultTheme.fontFamily.sans],
+        hero: ['bookman-jf-pro', ...defaultTheme.fontFamily.serif],
       },
 
       animation: {
