@@ -1686,7 +1686,7 @@ astro-compress@2.3.5:
     svgo "3.3.2"
     terser "5.36.0"
 
-astro-embed@latest:
+astro-embed@^0.9.0:
   version "0.9.0"
   resolved "https://registry.npmjs.org/astro-embed/-/astro-embed-0.9.0.tgz"
   integrity sha512-koBCZH8n1q7tyXW+s11mdwb5dFsv9kG8uMuF17CUIVFJWqwRxx7YCpa9o2P9PuPeWffsrwmdVJTl65kLLP2Uug==

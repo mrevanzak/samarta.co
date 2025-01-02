@@ -22,16 +22,13 @@ const { images } = Astro.props;
       }
     </div>
   </div>
-  <div class:list={['absolute bottom-[10%] left-0 z-10 flex w-full items-center justify-center gap-2', 'embla__dots']}>
+  <div class:list={['absolute bottom-[10%] left-0 z-10 flex w-full items-center justify-center gap-3', 'embla__dots']}>
     {
       images &&
         Array.from({ length: images.length }).map((_, index) => (
           <button
             type="button"
-            class:list={[
-              'h-3 w-3 rounded-full bg-black transition-all duration-300 ease-in-out',
-              'embla__dot',
-            ]}
+            class:list={['size-3 rounded-full bg-black transition-all duration-300 ease-in-out', 'embla__dot']}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))
@@ -110,13 +107,13 @@ const { images } = Astro.props;
       const previous = emblaApi.previousScrollSnap();
       const selected = emblaApi.selectedScrollSnap();
       // selected dots class
-      dotNodes[selected].classList.add('w-9', 'bg-primary');
+      dotNodes[selected].classList.add('w-12', 'bg-primary');
       if (previous === selected) return;
       dotNodes[selected].classList.remove('bg-black');
-      
+
       // unselected dots class
       dotNodes[previous].classList.add('bg-black');
-      dotNodes[previous].classList.remove('w-9', 'bg-primary');
+      dotNodes[previous].classList.remove('w-12', 'bg-primary');
     };
 
     emblaApi
