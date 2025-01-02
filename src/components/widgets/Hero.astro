@@ -1,11 +1,11 @@
 ---
-import type { Hero as Props } from '@/types';
 import Carousel from '@/components/ui/Carousel.astro';
+import type { Hero as Props } from '@/types';
 
 const { images } = Astro.props;
 ---
 
-<Carousel client:load images={images}/>
+<Carousel images={images} />
 <!-- <section class="relative md:-mt-[76px] not-prose" {...id ? { id } : {}}>
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
     <slot name="bg">
