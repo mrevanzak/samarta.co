@@ -1,4 +1,5 @@
 import typographyPlugin from '@tailwindcss/typography';
+import animate from 'tailwindcss-animate';
 import defaultTheme from 'tailwindcss/defaultTheme';
 import plugin from 'tailwindcss/plugin';
 
@@ -22,16 +23,25 @@ export default {
         primary: ['var(--aw-font-sans, ui-sans-serif)', ...defaultTheme.fontFamily.sans],
         hero: ['bookman-jf-pro', ...defaultTheme.fontFamily.serif],
       },
-
       animation: {
         fade: 'fadeInUp 1s both',
       },
-
       keyframes: {
         fadeInUp: {
-          '0%': { opacity: 0, transform: 'translateY(2rem)' },
-          '100%': { opacity: 1, transform: 'translateY(0)' },
+          '0%': {
+            opacity: 0,
+            transform: 'translateY(2rem)',
+          },
+          '100%': {
+            opacity: 1,
+            transform: 'translateY(0)',
+          },
         },
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
       },
     },
   },
@@ -40,6 +50,7 @@ export default {
     plugin(({ addVariant }) => {
       addVariant('intersect', '&:not([no-intersect])');
     }),
+    animate,
   ],
   darkMode: 'class',
 };

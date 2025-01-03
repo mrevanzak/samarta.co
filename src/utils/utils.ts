@@ -1,4 +1,6 @@
 import { I18N } from 'astrowind:config';
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat(I18N?.language, {
   year: 'numeric',
@@ -25,22 +27,22 @@ export const toUiAmount = (amount: number) => {
 
   if (amount >= 1000000000) {
     const formattedNumber = (amount / 1000000000).toFixed(1);
-    if (Number(formattedNumber) === parseInt(formattedNumber)) {
-      value = parseInt(formattedNumber) + 'B';
+    if (Number(formattedNumber) === Number.parseInt(formattedNumber)) {
+      value = Number.parseInt(formattedNumber) + 'B';
     } else {
       value = formattedNumber + 'B';
     }
   } else if (amount >= 1000000) {
     const formattedNumber = (amount / 1000000).toFixed(1);
-    if (Number(formattedNumber) === parseInt(formattedNumber)) {
-      value = parseInt(formattedNumber) + 'M';
+    if (Number(formattedNumber) === Number.parseInt(formattedNumber)) {
+      value = Number.parseInt(formattedNumber) + 'M';
     } else {
       value = formattedNumber + 'M';
     }
   } else if (amount >= 1000) {
     const formattedNumber = (amount / 1000).toFixed(1);
-    if (Number(formattedNumber) === parseInt(formattedNumber)) {
-      value = parseInt(formattedNumber) + 'K';
+    if (Number(formattedNumber) === Number.parseInt(formattedNumber)) {
+      value = Number.parseInt(formattedNumber) + 'K';
     } else {
       value = formattedNumber + 'K';
     }
@@ -50,3 +52,7 @@ export const toUiAmount = (amount: number) => {
 
   return value;
 };
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}

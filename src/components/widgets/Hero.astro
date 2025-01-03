@@ -1,6 +1,7 @@
 ---
 import Button from '@/components/ui/Button.astro';
 import Carousel from '@/components/ui/Carousel.astro';
+import ContactDialog from '@/components/widgets/ContactDialog';
 import type { Hero as Props } from '@/types';
 
 const { images } = Astro.props;
@@ -14,5 +15,5 @@ const { images } = Astro.props;
     <span class="text-5xl">Smart People!</span>
   </h1>
 
-  <Button variant="primary" class="rounded-lg">Contact Us</Button>
+  <ContactDialog client:load title="Contact Us"/>
 </div>
