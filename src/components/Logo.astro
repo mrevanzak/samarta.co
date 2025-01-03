@@ -6,9 +6,9 @@ import { findImage } from '@/utils/images';
 const image = await findImage('@/assets/images/logo.png');
 ---
 
-<div class="flex-row flex items-center">
-  <Image src={image} alt="Samarta Logo" class='size-16 2xl:size-14' aspectRatio="1:1" />
-  <span class="text-xl md:hidden lg:block md:text-2xl font-bold font-logo whitespace-nowrap text-broken-white uppercase">
+<div class="flex flex-row items-center">
+  <Image src={image} alt="Samarta Logo" class="size-16 2xl:size-14" aspectRatio="1:1" />
+  <span class="text-foreground whitespace-nowrap font-logo text-xl font-bold uppercase md:hidden md:text-2xl lg:block">
     {SITE?.name}
   </span>
 </div>

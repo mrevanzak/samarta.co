@@ -12,17 +12,17 @@ export interface Props {
 const {
   label = 'Toggle between Dark and Light mode',
   class:
-    className = 'text-broken-white rounded-full text-sm px-4 py-2 inline-flex items-center hover:bg-primary/20 dark:hover:bg-primary/20 transition ease-in duration-200',
+    className = 'rounded-full text-sm px-4 py-2 inline-flex items-center hover:bg-primary/20 dark:hover:bg-primary/20 transition ease-in duration-200',
   iconClass = 'w-6 h-6',
 } = Astro.props;
 ---
 
 {
   !(UI.theme && UI.theme.endsWith(':only')) && (
-    <div class="gap-2 flex">
+    <div class="flex gap-2">
       <button
         type="button"
-        class:list={[className, 'bg-primary dark:bg-transparent']}
+        class:list={[className, 'bg-primary text-broken-white dark:bg-transparent']}
         aria-label={label}
         data-apply-light-theme
       >
