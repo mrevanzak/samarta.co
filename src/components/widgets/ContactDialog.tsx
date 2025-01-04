@@ -1,5 +1,9 @@
+import { z } from 'astro/zod';
 import * as React from 'react';
+import { useMediaQuery } from 'usehooks-ts';
 
+import { actions } from 'astro:actions';
+import { navigate } from 'astro:transitions/client';
 import { Button } from '@/components/ui/react/Button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/react/Dialog';
 import {
@@ -12,8 +16,6 @@ import {
   DrawerTrigger,
 } from '@/components/ui/react/Drawer';
 import { Form, FormInput, useForm } from '@/components/ui/react/Form';
-import { z } from 'astro/zod';
-import { useMediaQuery } from 'usehooks-ts';
 
 export default function ContactDialog(props: { title: string }) {
   const [open, setOpen] = React.useState(false);
@@ -62,7 +64,7 @@ function ContactUsForm() {
   const contactSchema = z.object({
     name: z.string(),
     company: z.string(),
-    email: z.string(),
+    email: z.string().email(),
     phone: z.string(),
     message: z.string(),
   });
@@ -75,7 +77,16 @@ function ContactUsForm() {
 
   return (
     <Form {...methods}>
-      <form className="space-y-4" onSubmit={handleSubmit((data) => console.log(data))}>
+      <form
+        className="space-y-4"
+        onSubmit={handleSubmit(async (data) => {
+          const { error } = await actions.contact(data);
+          if (!error) {
+            alert('Thank you for contacting us!');
+            navigate('/');
+          }
+        })}
+      >
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <FormInput control={control} name="name" />
           <FormInput control={control} name="company" />

@@ -1,7 +1,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 
 import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
@@ -16,6 +16,8 @@ import astrowind from './vendor/integration';
 import { lazyImagesRehypePlugin, readingTimeRemarkPlugin, responsiveTablesRehypePlugin } from './src/utils/frontmatter';
 
 import react from '@astrojs/react';
+
+import cloudflare from '@astrojs/cloudflare';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -88,6 +90,14 @@ export default defineConfig({
       alias: {
         '@': path.resolve(__dirname, './src'),
       },
+    },
+  },
+
+  adapter: cloudflare(),
+
+  env: {
+    schema: {
+      DISCORD_WEBHOOK: envField.string({ context: 'server', access: 'secret', url: true }),
     },
   },
 });
