@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/react/Drawer';
 import { Input } from '@/components/ui/react/Input';
 import { Label } from '@/components/ui/react/Label';
+import { cn } from '@/utils/utils';
 import { useMediaQuery } from 'usehooks-ts';
 
 export default function ContactDialog(props: { title: string }) {
@@ -58,9 +59,9 @@ export default function ContactDialog(props: { title: string }) {
   );
 }
 
-function ProfileForm() {
+function ProfileForm(props: { className?: string }) {
   return (
-    <form className="space-y-4 px-4">
+    <form className={cn('space-y-4', props.className)}>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div className="space-y-2">
           <Label>Name</Label>
@@ -83,12 +84,8 @@ function ProfileForm() {
       </div>
       <div className="space-y-2">
         <Label>Message</Label>
-        {/* <Textarea
-          placeholder="Message"
-          className="min-h-[120px] focus:border-primary focus:ring-primary"
-        /> */}
       </div>
-      <Button className="w-full bg-orange-500 text-white hover:bg-orange-600">Submit</Button>
+      <Button className="w-full">Submit</Button>
     </form>
   );
 }
