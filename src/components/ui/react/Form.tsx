@@ -15,10 +15,10 @@ import {
 } from 'react-hook-form';
 import type { ZodType, ZodTypeDef } from 'zod';
 
+import { Input } from '@/components/ui/react/Input';
 import { Label } from '@/components/ui/react/Label';
+import { Textarea } from '@/components/ui/react/Textarea';
 import { cn } from '@/utils/utils';
-import { Input } from './Input';
-import { Textarea } from './textarea';
 
 const Form = FormProvider;
 
