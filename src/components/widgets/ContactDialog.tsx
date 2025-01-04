@@ -13,7 +13,6 @@ import {
 } from '@/components/ui/react/Drawer';
 import { Input } from '@/components/ui/react/Input';
 import { Label } from '@/components/ui/react/Label';
-import { cn } from '@/utils/utils';
 import { useMediaQuery } from 'usehooks-ts';
 
 export default function ContactDialog(props: { title: string }) {
@@ -48,8 +47,8 @@ export default function ContactDialog(props: { title: string }) {
         <DrawerHeader className="text-left">
           <DrawerTitle className={titleClassName}>{title}</DrawerTitle>
         </DrawerHeader>
-        <ProfileForm className="px-4" />
-        <DrawerFooter className="pt-2">
+        <ProfileForm />
+        <DrawerFooter className="p-0 pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
           </DrawerClose>
@@ -59,9 +58,9 @@ export default function ContactDialog(props: { title: string }) {
   );
 }
 
-function ProfileForm(props: { className?: string }) {
+function ProfileForm() {
   return (
-    <form className={cn('space-y-4', props.className)}>
+    <form className="space-y-4">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div className="space-y-2">
           <Label>Name</Label>
