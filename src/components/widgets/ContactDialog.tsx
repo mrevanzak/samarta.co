@@ -11,8 +11,8 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/react/Drawer';
-import { Input } from '@/components/ui/react/Input';
-import { Label } from '@/components/ui/react/Label';
+import { Form, FormInput, useForm } from '@/components/ui/react/Form';
+import { z } from 'astro/zod';
 import { useMediaQuery } from 'usehooks-ts';
 
 export default function ContactDialog(props: { title: string }) {
@@ -32,7 +32,7 @@ export default function ContactDialog(props: { title: string }) {
           <DialogHeader>
             <DialogTitle className={titleClassName}>{title}</DialogTitle>
           </DialogHeader>
-          <ProfileForm />
+          <ContactUsForm />
         </DialogContent>
       </Dialog>
     );
@@ -47,7 +47,7 @@ export default function ContactDialog(props: { title: string }) {
         <DrawerHeader className="text-left">
           <DrawerTitle className={titleClassName}>{title}</DrawerTitle>
         </DrawerHeader>
-        <ProfileForm />
+        <ContactUsForm />
         <DrawerFooter className="p-0 pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
@@ -58,33 +58,39 @@ export default function ContactDialog(props: { title: string }) {
   );
 }
 
-function ProfileForm() {
+function ContactUsForm() {
+  const contactSchema = z.object({
+    name: z.string(),
+    company: z.string(),
+    email: z.string(),
+    phone: z.string(),
+    message: z.string(),
+  });
+
+  const methods = useForm({
+    schema: contactSchema,
+    mode: 'onBlur',
+  });
+  const { handleSubmit, control } = methods;
+
   return (
-    <form className="space-y-4">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div className="space-y-2">
-          <Label>Name</Label>
-          <Input placeholder="Name" />
+    <Form {...methods}>
+      <form className="space-y-4" onSubmit={handleSubmit((data) => console.log(data))}>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <FormInput control={control} name="name" />
+          <FormInput control={control} name="company" />
+        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <FormInput control={control} name="email" />
+          <FormInput control={control} name="phone" />
         </div>
         <div className="space-y-2">
-          <Label>Company</Label>
-          <Input placeholder="Company" />
+          <FormInput as="textarea" control={control} name="message" />
         </div>
-      </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div className="space-y-2">
-          <Label>Email Address</Label>
-          <Input type="email" placeholder="Email Address" />
-        </div>
-        <div className="space-y-2">
-          <Label>Phone</Label>
-          <Input type="tel" placeholder="Phone" />
-        </div>
-      </div>
-      <div className="space-y-2">
-        <Label>Message</Label>
-      </div>
-      <Button className="w-full">Submit</Button>
-    </form>
+        <Button type="submit" className="w-full">
+          Submit
+        </Button>
+      </form>
+    </Form>
   );
 }

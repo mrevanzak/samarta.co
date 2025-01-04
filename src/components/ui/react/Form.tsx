@@ -1,19 +1,41 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import type * as LabelPrimitive from '@radix-ui/react-label';
 import { Slot } from '@radix-ui/react-slot';
 import * as React from 'react';
 import {
-    Controller,
-    type ControllerProps,
-    type FieldPath,
-    type FieldValues,
-    FormProvider,
-    useFormContext,
+  Controller,
+  type ControllerProps,
+  type FieldPath,
+  type FieldValues,
+  FormProvider,
+  type UseControllerProps,
+  type UseFormProps,
+  useForm as __useForm,
+  useFormContext,
 } from 'react-hook-form';
+import type { ZodType, ZodTypeDef } from 'zod';
 
 import { Label } from '@/components/ui/react/Label';
 import { cn } from '@/utils/utils';
+import { Input } from './Input';
+import { Textarea } from './textarea';
 
 const Form = FormProvider;
+
+const useForm = <TOut, TDef extends ZodTypeDef, TIn extends FieldValues>(
+  props: Omit<UseFormProps<TIn>, 'resolver' | 'values'> & {
+    schema: ZodType<TOut, TDef, TIn>;
+    values?: Partial<TIn>;
+  }
+) => {
+  const form = __useForm<TIn>({
+    ...props,
+    resolver: zodResolver(props.schema, undefined),
+    values: props?.values as TIn,
+  });
+
+  return form;
+};
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -85,14 +107,7 @@ const FormLabel = React.forwardRef<
 >(({ className, ...props }, ref) => {
   const { error, formItemId } = useFormField();
 
-  return (
-    <Label
-      ref={ref}
-      className={cn(error && 'text-red-500 dark:text-red-900', className)}
-      htmlFor={formItemId}
-      {...props}
-    />
-  );
+  return <Label ref={ref} className={cn(error && 'text-red-500', className)} htmlFor={formItemId} {...props} />;
 });
 FormLabel.displayName = 'FormLabel';
 
@@ -139,12 +154,7 @@ const FormMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<
     }
 
     return (
-      <p
-        ref={ref}
-        id={formMessageId}
-        className={cn('text-sm font-medium text-red-500 dark:text-red-900', className)}
-        {...props}
-      >
+      <p ref={ref} id={formMessageId} className={cn('text-sm font-medium text-red-500', className)} {...props}>
         {body}
       </p>
     );
@@ -152,4 +162,63 @@ const FormMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<
 );
 FormMessage.displayName = 'FormMessage';
 
-export { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, useFormField };
+type FormInputProps<T extends 'input' | 'textarea' = 'input'> = {
+  label?: string;
+  as?: T;
+} & React.ComponentProps<T>;
+const FormInput = <
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TElement extends 'input' | 'textarea' = 'input',
+>({
+  ...props
+}: UseControllerProps<TFieldValues, TName> & FormInputProps<TElement>) => {
+  const label = props.label || props.name.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase());
+
+  return (
+    <FormField
+      control={props.control}
+      name={props.name}
+      render={({ field, fieldState }) => (
+        <FormItem>
+          <FormLabel>{label}</FormLabel>
+          <FormControl>
+            {props.as === 'textarea' ? (
+              <Textarea
+                placeholder={props.placeholder ?? label}
+                className={cn({
+                  'border-red-500': fieldState.error,
+                })}
+                {...field}
+              />
+            ) : (
+              <Input
+                placeholder={props.placeholder ?? label}
+                className={cn({
+                  'border-red-500': fieldState.error,
+                })}
+                {...field}
+              />
+            )}
+          </FormControl>
+          <FormDescription />
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+};
+FormInput.displayName = 'FormInput';
+
+export {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormInput,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  useForm,
+  useFormField,
+};
