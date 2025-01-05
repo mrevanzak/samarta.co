@@ -1,11 +1,20 @@
 ---
-import { Icon } from 'astro-icon/components';
+import Image from '@/components/common/Image.astro';
 ---
 
-<section class="not-prose bg-primary">
-  <div class="text-md mx-auto max-w-6xl px-4 py-4 text-center font-medium sm:px-6">
-    <span class="font-bold">
-      <Icon name="tabler:info-square" class="inline-block h-5 w-5 align-text-bottom" /> Philosophy:</span
-    > Simplicity, Best Practices and High Performance
+<section
+  class="not-prose -mt-24 flex flex-col items-center justify-between overflow-clip rounded-lg bg-primary text-broken-white md:flex-row lg:gap-14"
+>
+  <Image
+    src="@/assets/images/note.png"
+    alt="Note"
+    class="md:clip-polygon md:h h-32 md:h-44 md:!w-min md:!object-cover lg:h-48"
+  />
+  <div class="p-4">
+    <h4>PT Swakarya Mandiri Amerta</h4>
+    <h4 class="font-normal">
+      Perusahaan konsultan spesialis yang bergerak di bidang Planning, Engineering, dan Grand Design bertaraf
+      internasional yang berkualitas, terpercaya, dan menjamin kepuasan pengguna jasa.
+    </h4>
   </div>
 </section>

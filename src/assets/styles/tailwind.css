@@ -92,10 +92,6 @@
 }
 
 @layer base {
-  :root {
-    --radius: 0.5rem;
-  }
-
   .h0 {
     @apply font-primary text-3xl font-bold md:text-5xl;
   }
@@ -126,4 +122,8 @@
     @apply font-primary text-sm md:text-base;
   }
   /* #endregion  /**======== Typography =========== */
+
+  .clip-polygon {
+    clip-path: polygon(95% 0, 100% 50%, 95% 100%, 0 100%, 0 0);
+  }
 }
