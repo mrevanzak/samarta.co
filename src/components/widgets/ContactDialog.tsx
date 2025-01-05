@@ -22,7 +22,7 @@ export default function ContactDialog(props: { title: string }) {
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
   const title = 'Contact Us';
-  const titleClassName = 'font-hero text-3xl md:text-5xl font-normal border-l-4 border-primary pl-6';
+  const titleClassName = 'headline';
 
   if (isDesktop) {
     return (

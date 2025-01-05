@@ -1,0 +1,55 @@
+---
+import Image from '@/components/common/Image.astro';
+import type { Image as ImageType } from '@/types';
+import { cn } from '@/utils/utils';
+import WidgetWrapper from '../ui/WidgetWrapper.astro';
+
+type Props = {
+  title: string;
+  images: ImageType[];
+  contents: {
+    heading: string;
+    type: 'list' | 'label';
+    point: string[];
+  }[];
+  reversed?: boolean;
+};
+
+const { title, images, contents, reversed = false } = Astro.props;
+---
+
+<WidgetWrapper
+  containerClass={cn('flex flex-col gap-8 py-20 sm:flex-row', {
+    'sm:flex-row-reverse': reversed,
+  })}
+>
+  <Image {...images[0]} class="!aspect-square h-72 flex-1 !object-cover" />
+  <div class="flex flex-1 flex-col justify-between space-y-4">
+    <h1>{title}</h1>
+    <div class="space-y-4">
+      {
+        contents.map((content) => (
+          <div class="space-y-2">
+            <h4>{content.heading}</h4>
+            {content.type === 'list' ? (
+              <ul>
+                {content.point.map((point) => (
+                  <li>• {point}</li>
+                ))}
+              </ul>
+            ) : (
+              <div class="flex flex-wrap gap-4">
+                {content.point.map((point) => (
+                  <div class="flex items-center gap-2 rounded-lg border border-foreground bg-primary/20 px-4 py-2">
+                    <div class="size-2 rounded-full bg-primary" />
+                    <p class="">{point}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</WidgetWrapper>

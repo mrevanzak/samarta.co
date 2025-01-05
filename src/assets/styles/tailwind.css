@@ -98,7 +98,7 @@
 
   h1,
   .h1 {
-    @apply font-primary text-2xl font-bold md:text-4xl;
+    @apply font-hero text-2xl font-bold md:text-4xl;
   }
 
   h2,
@@ -125,5 +125,9 @@
 
   .clip-polygon {
     clip-path: polygon(95% 0, 100% 50%, 95% 100%, 0 100%, 0 0);
+  }
+
+  .headline {
+    @apply border-l-4 border-primary pl-6 font-hero text-3xl font-normal md:text-5xl;
   }
 }
