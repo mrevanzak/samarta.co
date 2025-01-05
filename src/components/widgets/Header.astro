@@ -55,7 +55,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
   <div class="absolute inset-0"></div>
   <div
     class:list={[
-      'relative mx-auto w-full px-3 py-3 text-default md:flex md:gap-10 md:px-6',
+      'relative mx-auto w-full px-3 py-3 md:flex md:gap-10 md:px-6',
       {
         'max-w-7xl': !isFullWidth,
       },
@@ -75,7 +75,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         aria-label="Main navigation"
       >
         <ul
-          class="flex w-full flex-col gap-2 text-xl font-medium tracking-[0.01rem] md:w-auto md:flex-row md:justify-center md:text-base"
+          class="flex w-full flex-col gap-2 tracking-[0.01rem] md:w-auto md:flex-row md:justify-center h4"
         >
           {
             links.map(({ text, href, links }) => (
@@ -97,7 +97,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                         <li>
                           <a
                             class:list={[
-                              'hover:text-link whitespace-no-wrap block px-5 py-2 transition duration-200 ease-in first:rounded-t-lg last:rounded-b-lg hover:bg-primary/20',
+                              'hover:text-link whitespace-no-wrap block px-5 py-2 transition duration-200 ease-in first:rounded-t-lg last:rounded-b-lg hover:bg-primary/20 h4 font-normal',
                               { 'bg-primary font-semibold text-broken-white': href2 === currentPath },
                             ]}
                             href={href2}
