@@ -92,6 +92,10 @@
 }
 
 @layer base {
+  .layout {
+    @apply mx-auto w-11/12 max-w-6xl;
+  }
+
   .h0 {
     @apply font-primary text-3xl font-bold md:text-5xl;
   }

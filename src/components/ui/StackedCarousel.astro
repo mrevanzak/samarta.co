@@ -1,0 +1,14 @@
+---
+import Image from '@/components/common/Image.astro';
+import type { Image as ImageType } from '@/types';
+
+type Props = {
+  images?: ImageType[];
+};
+
+const { images } = Astro.props;
+---
+
+<div class="lg:absolute lg:bottom-0">
+  {images && images.map((image) => <Image class="!aspect-[2/3] !max-w-72 !object-cover" {...image} />)}
+</div>

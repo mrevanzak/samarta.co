@@ -62,4 +62,52 @@ import '@fontsource-variable/plus-jakarta-sans';
       color: snow;
     }
   }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Snap */
+
+  .snap {
+    width: 100%;
+    height: 100%;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+    overflow: auto;
+  }
+
+  .snap-item {
+    height: 100%;
+    scroll-snap-align: center;
+    display: grid;
+    place-items: center;
+  }
+
+  @media (pointer: coarse) and (hover: none) {
+    .snap {
+      display: flex;
+      scroll-snap-type: x mandatory;
+    }
+    .snap-item {
+      flex-shrink: 0;
+      width: 100%;
+    }
+  }
+
+  /* Card */
+
+  .card {
+    margin: auto;
+    inset: 0;
+    position: absolute;
+    background: white;
+    display: grid;
+    place-items: center;
+    border-radius: 24px;
+    aspect-ratio: 2 / 3;
+    width: 220px;
+    pointer-events: none;
+  }
 </style>
