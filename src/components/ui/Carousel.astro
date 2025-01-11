@@ -81,54 +81,62 @@ const { images, imageClassName } = Astro.props;
     loop: true,
   };
 
-  const emblaNode = document.querySelector<HTMLElement>('.embla')!;
-  const viewportNode = emblaNode.querySelector<HTMLElement>('.embla__viewport')!;
-  const dotsNode = document.querySelector<HTMLElement>('.embla__dots')!;
-  const emblaApi = EmblaCarousel(viewportNode, options, [
-    Autoplay({
-      delay: 5000,
-    }),
-    Fade(),
-  ]);
+  function initCarousel() {
+    const emblaNode = document.querySelector<HTMLElement>('.embla')!;
+    const viewportNode = emblaNode.querySelector<HTMLElement>('.embla__viewport')!;
+    const dotsNode = document.querySelector<HTMLElement>('.embla__dots')!;
+    const emblaApi = EmblaCarousel(viewportNode, options, [
+      Autoplay({
+        delay: 5000,
+      }),
+      Fade(),
+    ]);
 
-  const addDotBtnsAndClickHandlers = (emblaApi: EmblaCarouselType, dotsNode: HTMLElement) => {
-    let dotNodes: HTMLElement[] = [];
+    const addDotBtnsAndClickHandlers = (emblaApi: EmblaCarouselType, dotsNode: HTMLElement) => {
+      let dotNodes: HTMLElement[] = [];
 
-    const addDotBtnsWithClickHandlers = (): void => {
-      const scrollTo = (index: number): void => {
-        emblaApi.scrollTo(index);
+      const addDotBtnsWithClickHandlers = (): void => {
+        const scrollTo = (index: number): void => {
+          emblaApi.scrollTo(index);
+        };
+
+        dotNodes = Array.from(dotsNode.querySelectorAll('.embla__dot'));
+        dotNodes.forEach((dotNode, index) => {
+          dotNode.addEventListener('click', () => scrollTo(index), false);
+        });
       };
 
-      dotNodes = Array.from(dotsNode.querySelectorAll('.embla__dot'));
-      dotNodes.forEach((dotNode, index) => {
-        dotNode.addEventListener('click', () => scrollTo(index), false);
-      });
+      const toggleDotBtnsActive = (): void => {
+        const previous = emblaApi.previousScrollSnap();
+        const selected = emblaApi.selectedScrollSnap();
+        // selected dots class
+        dotNodes[selected].classList.add('w-12', 'bg-primary');
+        if (previous === selected) return;
+        dotNodes[selected].classList.remove('bg-black');
+
+        // unselected dots class
+        dotNodes[previous].classList.add('bg-black');
+        dotNodes[previous].classList.remove('w-12', 'bg-primary');
+      };
+
+      emblaApi
+        .on('init', addDotBtnsWithClickHandlers)
+        .on('reInit', addDotBtnsWithClickHandlers)
+        .on('init', toggleDotBtnsActive)
+        .on('reInit', toggleDotBtnsActive)
+        .on('select', toggleDotBtnsActive);
+
+      return () => {};
     };
 
-    const toggleDotBtnsActive = (): void => {
-      const previous = emblaApi.previousScrollSnap();
-      const selected = emblaApi.selectedScrollSnap();
-      // selected dots class
-      dotNodes[selected].classList.add('w-12', 'bg-primary');
-      if (previous === selected) return;
-      dotNodes[selected].classList.remove('bg-black');
+    const removeDotBtnsAndClickHandlers = addDotBtnsAndClickHandlers(emblaApi, dotsNode);
 
-      // unselected dots class
-      dotNodes[previous].classList.add('bg-black');
-      dotNodes[previous].classList.remove('w-12', 'bg-primary');
-    };
+    emblaApi.on('destroy', removeDotBtnsAndClickHandlers);
+  }
 
-    emblaApi
-      .on('init', addDotBtnsWithClickHandlers)
-      .on('reInit', addDotBtnsWithClickHandlers)
-      .on('init', toggleDotBtnsActive)
-      .on('reInit', toggleDotBtnsActive)
-      .on('select', toggleDotBtnsActive);
+  initCarousel();
 
-    return () => {};
-  };
-
-  const removeDotBtnsAndClickHandlers = addDotBtnsAndClickHandlers(emblaApi, dotsNode);
-
-  emblaApi.on('destroy', removeDotBtnsAndClickHandlers);
+  document.addEventListener('astro:after-swap', () => {
+    initCarousel();
+  });
 </script>
