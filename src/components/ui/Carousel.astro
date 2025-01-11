@@ -3,12 +3,14 @@ import Image from '@/components/common/Image.astro';
 import type { Image as ImageType } from '@/types';
 import { cn } from '@/utils/utils';
 
-type Props = {
+export type CarouselProps = {
   images?: ImageType[];
   imageClassName?: astroHTML.JSX.HTMLAttributes['class'];
+  dotsClassName?: astroHTML.JSX.HTMLAttributes['class'];
 };
+type Props = CarouselProps;
 
-const { images, imageClassName } = Astro.props;
+const { images, imageClassName, dotsClassName } = Astro.props;
 ---
 
 <div class="embla">
@@ -24,18 +26,25 @@ const { images, imageClassName } = Astro.props;
       }
     </div>
   </div>
-  <div class:list={['absolute bottom-[15%] left-0 z-10 flex w-full items-center justify-center gap-3', 'embla__dots']}>
-    {
-      images &&
-        Array.from({ length: images.length }).map((_, index) => (
+  {
+    images && images.length > 1 && (
+      <div
+        class={cn(
+          'absolute bottom-[15%] left-0 z-10 flex w-full items-center justify-center gap-3',
+          'embla__dots',
+          dotsClassName
+        )}
+      >
+        {images.map((_, index) => (
           <button
             type="button"
             class:list={['size-3 rounded-full bg-black transition-all duration-300 ease-in-out', 'embla__dot']}
             aria-label={`Go to slide ${index + 1}`}
           />
-        ))
-    }
-  </div>
+        ))}
+      </div>
+    )
+  }
 </div>
 
 <style>

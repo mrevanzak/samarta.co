@@ -1,18 +1,13 @@
 ---
-import Carousel from '@/components/ui/Carousel.astro';
-import type { Image } from '@/types';
-import { cn } from '@/utils/utils';
+import Carousel, { type CarouselProps } from '@/components/ui/Carousel.astro';
 
-type Props = {
-  images: Image[];
-  imageClassName?: astroHTML.JSX.HTMLAttributes['class'];
-};
+type Props = CarouselProps;
 
-const { images, imageClassName } = Astro.props;
+const { images, imageClassName, dotsClassName } = Astro.props;
 ---
 
 <div class="relative">
-  <Carousel images={images} imageClassName={imageClassName} />
+  <Carousel images={images} imageClassName={imageClassName} dotsClassName={dotsClassName} />
   <slot name="overlay" />
   <slot />
 </div>

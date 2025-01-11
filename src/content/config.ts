@@ -52,8 +52,7 @@ const postCollection = defineCollection({
     publishDate: z.date().optional(),
 
     title: z.string(),
-    // image: z.array(z.string()).min(1),
-    image: z.string(),
+    images: z.array(z.string()).min(1),
     year: z.number(),
     spesifications: z.object({
       client: z.string(),
