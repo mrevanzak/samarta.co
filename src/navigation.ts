@@ -35,9 +35,9 @@ export const generateHeaderData = async () => ({
     {
       text: 'Projects',
       href: getProjectPermalink(),
-      links: (await findLatestPosts({ count: 6 })).map((post) => ({
+      links: (await findLatestPosts({ count: 5 })).map((post) => ({
         text: post.title,
-        href: post.permalink,
+        href: getPermalink(post.permalink, 'project'),
       })),
     },
     {
