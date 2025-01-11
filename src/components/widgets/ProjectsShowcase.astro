@@ -1,125 +1,37 @@
 ---
-import WidgetWrapper from '../ui/WidgetWrapper.astro';
+import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
+import { type Project } from '@/types';
+import Image from '@/components/common/Image.astro';
+import { getPermalink } from '@/utils/permalinks';
 
-const projects = [
-  {
-    id: '1',
-    slug: 'penyusunan-analisa-standar-belanja-kabupaten-bondowoso-2023',
-    created_at: '2023',
-    title: 'Penyusunan Analisa Standar Belanja Kabupaten Bondowoso',
-    gallery: ['https://picsum.photos/id/221/1000/1000', 'https://picsum.photos/id/299/1000/400'],
-    specification: {
-      client: 'Pemerintah Kabupaten Bondowoso',
-      location: 'Kabupaten Bondowoso',
-      duration: 'November 2023 hingga Desember 2023',
-      status: 'Completed',
-    },
-    descriptions: [
-      'Penyusunan standar harga yaitu komponen Analisis Standar Belanja dalam perencanan pengelolaan keuangan daerah APBD Tahun Anggaran 2025. Kebijakan terkait harga yang digunakan merupakan harga tertinggi dalam mencapai target output kegiatan. Efektif dan efisiensi merupakan elemen dasar agar belanja APBD dapat terukur dengan jelas. Dengan demikian, penyusunan Standar Satuan Harga menjadi hal yang sangat penting dalam mencerminkan belanja APBD suatu daerah.',
-    ],
-  },
-  {
-    id: '2',
-    slug: 'penyusunan-standar-satuan-harga-kabupaten-bondowoso-2023',
-    created_at: '2023',
-    title: 'Penyusunan Standar Satuan Harga Kabupaten Bondowoso',
-    gallery: ['https://picsum.photos/id/57/1000/600'],
-    specification: {
-      client: 'Pemerintah Kabupaten Bondowoso',
-      location: 'Kabupaten Bondowoso',
-      duration: 'November 2023 hingga Desember 2023',
-      status: 'Completed',
-    },
-    descriptions: [
-      'Penyusunan standar harga yaitu komponen Standar Satuan Harga dalam perencanan pengelolaan keuangan daerah APBD Tahun Anggaran 2025. Kebijakan terkait harga yang digunakan merupakan harga tertinggi dalam mencapai target output kegiatan. Efektif dan efisiensi merupakan elemen dasar agar belanja APBD dapat terukur dengan jelas. Dengan demikian, penyusunan Standar Satuan Harga menjadi hal yang sangat penting dalam mencerminkan belanja APBD suatu daerah.',
-    ],
-  },
-  {
-    id: '3',
-    slug: 'penyusunan-hspk-dan-asb-fisik-konstruksi-kabupaten-tulungagung-2023',
-    created_at: '2023',
-    title:
-      'Penyusunan Harga Satuan Pokok Kegiatan (HSPK) dan Analisis Standar Belanja (ASB) Fisik Konstruksi Kabupaten Tulungagung',
-    gallery: ['https://picsum.photos/id/444/1000/300'],
-    specification: {
-      client: 'Pemerintah Kabupaten Tulungagung',
-      location: 'Kabupaten Tulungagung',
-      duration: 'November 2023 hingga Desember 2023',
-      status: 'Completed',
-    },
-    descriptions: [
-      'Penyusunan standar harga yaitu komponen Harga Satuan Pokok Kegiatan (HSPK) dan Analisis Standar Belanja (ASB) Fisik Konstruksi dalam perencanan pengelolaan keuangan daerah APBD Tahun Anggaran 2024. Kebijakan terkait harga yang digunakan merupakan harga tertinggi dalam mencapai target output kegiatan. Efektif dan efisiensi merupakan elemen dasar agar belanja APBD dapat terukur dengan jelas. Dengan demikian, penyusunan Standar Satuan Harga menjadi hal yang sangat penting dalam mencerminkan belanja APBD suatu daerah.',
-    ],
-  },
-  {
-    id: '4',
-    slug: 'jasa-penyusunan-hspk-dan-asb-fisik-konstruksi-sidoarjo-2024',
-    created_at: '2024',
-    title: 'Jasa Penyusunan HSPK dan ASB Fisik Konstruksi',
-    gallery: ['https://picsum.photos/id/893/1000/700'],
-    specification: {
-      client: 'Pemerintah Kabupaten Sidoarjo',
-      location: 'Kabupaten Sidoarjo',
-      duration: 'April 2024 hingga Mei 2024',
-      status: 'Completed',
-    },
-    descriptions: [
-      'Penyusunan standar harga yaitu komponen HSPK Fisik dan ASB Fisik Konstruksi dalam perencanan pengelolaan keuangan daerah APBD Tahun Anggaran 2025. Kebijakan terkait harga yang digunakan merupakan harga tertinggi dalam mencapai target output kegiatan. Efektif dan efisiensi merupakan elemen dasar agar belanja APBD dapat terukur dengan jelas. Dengan demikian, penyusunan Standar Satuan Harga menjadi hal yang sangat penting dalam mencerminkan belanja APBD suatu daerah.',
-    ],
-  },
-  {
-    id: '5',
-    slug: 'jasa-penyusunan-asb-non-fisik-sidoarjo-2024',
-    created_at: '2024',
-    title: 'Jasa Penyusunan ASB Non Fisik',
-    gallery: ['https://picsum.photos/id/315/1000/800'],
-    specification: {
-      client: 'Pemerintah Kabupaten Sidoarjo',
-      location: 'Kabupaten Sidoarjo',
-      duration: 'April 2024 hingga Mei 2024',
-      status: 'Completed',
-    },
-    descriptions: [
-      'Penyusunan standar harga yaitu komponen Analisis Standar Belanja Non Fisik dalam perencanan pengelolaan keuangan daerah APBD Tahun Anggaran 2025. Kebijakan terkait harga yang digunakan merupakan harga tertinggi dalam mencapai target output kegiatan. Efektif dan efisiensi merupakan elemen dasar agar belanja APBD dapat terukur dengan jelas. Dengan demikian, penyusunan Standar Satuan Harga menjadi hal yang sangat penting dalam mencerminkan belanja APBD suatu daerah.',
-    ],
-  },
-  {
-    id: '6',
-    slug: 'pernecanaan-konstruksi-ram-gedung-rs-paru-manguharjo-madiun-2024',
-    created_at: '2024',
-    title: 'Perencanaan Konstruksi Pembuatan Ram Gedung Rumah Sakit Paru Manguharjo Provinsi Jawa Timur',
-    // gallery: [p6r1, p6r2, p6r3, p6r4, p6r5, p6r6],
-    specification: {
-      client: 'Rumah Sakit Paru Manguharjo',
-      location: 'Kota Madiun',
-      duration: 'Februari 2024',
-      status: 'Completed',
-    },
-    descriptions: [
-      'Rumah Sakit Paru Manguharjo Provinsi Jawa Timur, dalam rangka meningkatkan fungsinya sebagai instansi pelayanan kepada masyarakat wilayah Madiun dan sekitarnya, melaksanakan beberapa kegiatan yang berkaitan dengan pemeliharaan terhadap peningkatan sarana dan prasarana gedung yang ada. Berkaitan dengan hal tersebut Rumah Sakit Paru Manguharjo melalui dana APBD Tahun Anggaran 2024 mengadakan Kegiatan Pemeliharaan Gedung dan Bangunan. Diharapkan dengan kegiatan tersebut dapat menunjang pelaksanakan tugas Rumah Sakit Paru Manguharjo dalam melaksanakan fungsinya sebagai pelayanan kesehatan masyarakat.',
-    ],
-  },
-].reverse();
+type Props = {
+  projects: Project[];
+};
+
+const { projects } = Astro.props;
 ---
 
 <!-- scrollable on x-axis -->
 <WidgetWrapper containerClass="overflow-x-auto flex flex-row layout snap-mandatory snap-x gap-6 !px-0">
   {
     projects.map((project) => (
-      <div class="max-w-lg shrink-0 snap-start scroll-mx-6 space-y-6" key={project.id}>
+      <a class="max-w-lg shrink-0 snap-start scroll-mx-6 space-y-6" href={getPermalink(project.permalink, 'project')}>
+        <Image src={project.image} alt={project.title} class="aspect-video h-64 max-w-md rounded-lg" />
         <h4>{project.title}</h4>
-        <p class="line-clamp-3">{project.descriptions}</p>
+        <div class="line-clamp-3">
+          <project.Content />
+        </div>
         <div class="flex flex-wrap gap-4">
-          {Object.entries(project.specification)
+          {Object.entries(project.spesifications)
             .filter(([key]) => key !== 'client')
-            .map(([_, value]) => (
+            .map(([, value]) => (
               <div class="flex items-center gap-2 rounded-lg border border-foreground px-4 py-2">
                 <div class="size-2 rounded-full bg-primary" />
                 <p class="">{value}</p>
               </div>
             ))}
         </div>
-      </div>
+      </a>
     ))
   }
 </WidgetWrapper>

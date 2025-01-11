@@ -7,9 +7,15 @@ import Hero from '@/components/widgets/Hero.astro';
 import Note from '@/components/widgets/Note.astro';
 import ProjectsShowcase from '@/components/widgets/ProjectsShowcase.astro';
 import Service from '@/components/widgets/Service.astro';
+import { findLatestPosts } from '@/utils/project';
+
 const metadata = {
   ignoreTitleTemplate: true,
 };
+
+const latestProject = await findLatestPosts({
+  count: 3,
+});
 ---
 
 <Layout metadata={metadata}>
@@ -150,5 +156,5 @@ const metadata = {
   <!-- Projects Widget *************** -->
 
   <Headline title="Our Projects" />
-  <ProjectsShowcase />
+  <ProjectsShowcase projects={latestProject} />
 </Layout>
