@@ -3,7 +3,7 @@ import Footer from '@/components/widgets/Footer.astro';
 import Header from '@/components/widgets/Header.astro';
 import Layout from '@/layouts/Layout.astro';
 
-import { footerData, headerData } from '@/navigation';
+import { footerData, generateHeaderData } from '@/navigation';
 
 import type { MetaData } from '@/types';
 
@@ -12,6 +12,8 @@ export interface Props {
 }
 
 const { metadata } = Astro.props;
+
+const headerData = await generateHeaderData();
 ---
 
 <Layout metadata={metadata}>

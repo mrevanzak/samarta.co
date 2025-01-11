@@ -1,6 +1,7 @@
 import { getAsset, getHomePermalink, getPermalink, getProjectPermalink } from './utils/permalinks';
+import { findLatestPosts } from './utils/project';
 
-export const headerData = {
+export const generateHeaderData = async () => ({
   links: [
     {
       text: 'Home',
@@ -34,39 +35,17 @@ export const headerData = {
     {
       text: 'Projects',
       href: getProjectPermalink(),
-      links: [
-        {
-          text: 'Perencanaan Konstruksi RS Paru Manguharjo ',
-          href: getPermalink('perencanaan-konstruksi-rs-paru-manguharjo', 'project'),
-        },
-        {
-          text: 'Jasa Penyusunan ASB Non Fisik',
-          href: getPermalink('jasa-penyusunan-asb-non-fisik', 'project'),
-        },
-        {
-          text: 'Jasa Penyusunan HSPK dan ASB Fisik Konstruksi',
-          href: getPermalink('jasa-penyusunan-hspk-dan-asb-fisik-konstruksi', 'project'),
-        },
-        {
-          text: 'Penyusunan HSPK dan ASB Fisik Konstruksi Kabupaten Tulungagung',
-          href: getPermalink('penyusunan-hspk-dan-asb-fisik-konstruksi-kabupaten-tulungagung', 'project'),
-        },
-        {
-          text: 'Penyusunan SSH Kabupaten Bondowoso',
-          href: getPermalink('penyusunan-ssh-kabupaten-bondowoso', 'project'),
-        },
-        {
-          text: 'Penyusunan ASB Kabupaten Bondowoso',
-          href: getPermalink('penyusunan-asb-kabupaten-bondowoso', 'project'),
-        },
-      ],
+      links: (await findLatestPosts({ count: 6 })).map((post) => ({
+        text: post.title,
+        href: post.permalink,
+      })),
     },
     {
       text: 'Contact Us',
       href: getPermalink('/contact-us'),
     },
   ],
-};
+});
 
 export const footerData = {
   links: [
