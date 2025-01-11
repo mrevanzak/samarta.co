@@ -1,7 +1,7 @@
 import { getRssString } from '@astrojs/rss';
 
 import { APP_BLOG, METADATA, SITE } from 'astrowind:config';
-import { fetchPosts } from '@/utils/blog';
+import { fetchPosts } from '@/utils/project';
 import { getPermalink } from '@/utils/permalinks';
 
 export const GET = async () => {
@@ -22,7 +22,6 @@ export const GET = async () => {
     items: posts.map((post) => ({
       link: getPermalink(post.permalink, 'post'),
       title: post.title,
-      description: post.excerpt,
       pubDate: post.publishDate,
     })),
 

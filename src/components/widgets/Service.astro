@@ -29,7 +29,7 @@ const { title, images, contents, reversed = false } = Astro.props;
   <div class="bg-primary py-6 md:py-14">
     <div class={cn('layout flex sm:flex-row flex-col gap-6', { 'sm:flex-row-reverse': reversed })}>
       <div class="relative flex flex-1 justify-center">
-        <StackedCarousel client:visible images={images} />
+        <StackedCarousel images={images} />
       </div>
       <div class="flex flex-1 flex-col space-y-12">
         <div class="space-y-4">
