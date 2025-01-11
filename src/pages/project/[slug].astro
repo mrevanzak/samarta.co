@@ -7,10 +7,11 @@ import merge from 'lodash.merge';
 
 import Headline from '@/components/ui/Headline.astro';
 import Hero from '@/components/widgets/Hero.astro';
+import ProjectsShowcase from '@/components/widgets/ProjectsShowcase.astro';
 import type { MetaData } from '@/types';
 import { findImage } from '@/utils/images';
 import { getCanonical, getPermalink } from '@/utils/permalinks';
-import { getStaticPathsProjectPost, projectPostRobots } from '@/utils/project';
+import { findLatestPosts, getStaticPathsProjectPost, projectPostRobots } from '@/utils/project';
 
 export const prerender = true;
 
@@ -29,6 +30,12 @@ const images = await Promise.all(
     alt: `${post.title} - ${index}`,
   }))
 );
+
+const otherProjects = (
+  await findLatestPosts({
+    count: 4,
+  })
+)?.filter((project) => project.permalink !== post.permalink);
 
 const metadata = merge(
   {
@@ -81,8 +88,8 @@ const metadata = merge(
       </a>
     </div>
 
-    <!-- <ToBlogLink />
-    <RelatedPosts post={post} /> -->
+    <Headline title="Other Projects" className="mx-0" />
+    <ProjectsShowcase projects={otherProjects} className="mx-0" />
   </section>
 </Layout>
 

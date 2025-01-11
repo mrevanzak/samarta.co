@@ -1,22 +1,24 @@
 ---
+import Image from '@/components/common/Image.astro';
 import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
 import { type Project } from '@/types';
-import Image from '@/components/common/Image.astro';
 import { getPermalink } from '@/utils/permalinks';
+import { cn } from '@/utils/utils';
 
 type Props = {
   projects: Project[];
+  className?: string;
 };
 
-const { projects } = Astro.props;
+const { projects, className } = Astro.props;
 ---
 
 <!-- scrollable on x-axis -->
-<WidgetWrapper containerClass="overflow-x-auto flex flex-row layout snap-mandatory snap-x gap-6 !px-0">
+<WidgetWrapper containerClass={cn("overflow-x-auto flex flex-row w-full layout snap-mandatory snap-x gap-6 !px-0", className)}>
   {
     projects.map((project) => (
       <a class="max-w-lg shrink-0 snap-start scroll-mx-6 space-y-6" href={getPermalink(project.permalink, 'project')}>
-        <Image src={project.image} alt={project.title} class="aspect-video h-64 max-w-md rounded-lg" />
+        <Image src={project.images[0]} alt={project.title} class="aspect-video h-64 max-w-md rounded-lg" />
         <h4>{project.title}</h4>
         <div class="line-clamp-3">
           <project.Content />
