@@ -1,4 +1,4 @@
-import { getAsset, getHomePermalink, getPermalink } from './utils/permalinks';
+import { getAsset, getHomePermalink, getPermalink, getProjectPermalink } from './utils/permalinks';
 
 export const headerData = {
   links: [
@@ -33,6 +33,7 @@ export const headerData = {
     },
     {
       text: 'Projects',
+      href: getProjectPermalink(),
       links: [
         {
           text: 'Perencanaan Konstruksi RS Paru Manguharjo ',

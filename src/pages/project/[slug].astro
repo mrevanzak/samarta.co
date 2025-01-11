@@ -1,0 +1,125 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+
+import Layout from '@/layouts/PageLayout.astro';
+import type { ImageMetadata } from 'astro';
+import merge from 'lodash.merge';
+
+import Headline from '@/components/ui/Headline.astro';
+import Hero from '@/components/widgets/Hero.astro';
+import type { MetaData } from '@/types';
+import { findImage } from '@/utils/images';
+import { getCanonical, getPermalink } from '@/utils/permalinks';
+import { getStaticPathsProjectPost, projectPostRobots } from '@/utils/project';
+
+export const prerender = true;
+
+export const getStaticPaths = (async () => {
+  return await getStaticPathsProjectPost();
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { post } = Astro.props;
+
+const url = getCanonical(getPermalink(post.permalink, 'project'));
+const image = (await findImage(post.image)) as ImageMetadata | string | undefined;
+
+const metadata = merge(
+  {
+    title: post.title,
+    description: post.Content,
+    robots: {
+      index: projectPostRobots?.index,
+      follow: projectPostRobots?.follow,
+    },
+    openGraph: {
+      type: 'article',
+      ...(image
+        ? { images: [{ url: image, width: (image as ImageMetadata)?.width, height: (image as ImageMetadata)?.height }] }
+        : {}),
+    },
+  },
+  { ...(post?.metadata ? { ...post.metadata, canonical: post.metadata?.canonical || url } : {}) }
+) as MetaData;
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    slot="hero"
+    images={[
+      { src: '@/assets/images/hero.png', alt: 'Hero Image 1' },
+      { src: '@/assets/images/hero-2.png', alt: 'Hero Image 2' },
+      { src: '@/assets/images/hero-3.png', alt: 'Hero Image 3' },
+    ]}
+    imageClassName="h-[60vh]"
+  />
+  <section class="layout my-8 space-y-8 lg:my-16">
+    <Headline title={post.title} className="mx-0" />
+    <div class="flex flex-row gap-7">
+      {
+        Object.entries(post.spesifications).map(([key, value]) => (
+          <div class="flex flex-1 flex-col gap-2">
+            <h4 class="capitalize">{key}</h4>
+            <p class="">{value}</p>
+          </div>
+        ))
+      }
+    </div>
+    <div class="flex flex-col justify-between gap-2 md:flex-row">
+      {
+        post.Content && (
+          <div class="prose-headings:font-heading prose-headings:leading-tighter prose prose-base dark:prose-invert lg:prose-xl prose-headings:scroll-mt-[80px] prose-headings:font-bold prose-headings:tracking-tighter prose-a:text-primary prose-li:my-0 prose-img:rounded-md prose-img:shadow-lg dark:prose-a:text-blue-400">
+            <h4 class="not-prose capitalize">Deskripsi</h4>
+            <post.Content />
+          </div>
+        )
+      }
+      <a class="w-fit space-y-2" href={post.portfolio} target="_blank">
+        <h4 class="not-prose capitalize">Portofolio</h4>
+        <div class="space-y-2 rounded-lg bg-primary p-4">
+          <div id="qr" class="size-[176px]"></div>
+          <p class="text-center">Scan or Click Here!</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- <ToBlogLink />
+    <RelatedPosts post={post} /> -->
+  </section>
+</Layout>
+
+<script>
+  import { findImage } from '@/utils/images';
+  import QRCodeStyling from 'qr-code-styling';
+
+  async function generateQr() {
+    const image = await findImage('@/assets/images/logo.png');
+
+    const qrCode = new QRCodeStyling({
+      type: 'svg',
+      shape: 'square',
+      width: 176,
+      height: 176,
+      data: 'test',
+      image: typeof image === 'string' ? image : image?.src,
+      margin: 0,
+      qrOptions: { typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'Q' },
+      imageOptions: { saveAsBlob: true, hideBackgroundDots: true, imageSize: 0.4, margin: 0 },
+      dotsOptions: { type: 'rounded', color: '#1d2434', roundSize: true },
+      backgroundOptions: { round: 0, color: '#ffffff' },
+      cornersSquareOptions: { type: 'extra-rounded', color: '#1d2434' },
+      cornersDotOptions: { type: 'rounded', color: '#1d2434' },
+    });
+
+    const element = document.getElementById('qr');
+    if (element) {
+      qrCode.append(element);
+    }
+  }
+
+  generateQr();
+  document.addEventListener('astro:after-swap', () => {
+    generateQr();
+  });
+</script>

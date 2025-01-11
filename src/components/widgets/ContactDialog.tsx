@@ -71,7 +71,7 @@ function ContactUsForm() {
 
   const methods = useForm({
     schema: contactSchema,
-    mode: 'onBlur',
+    mode: 'onSubmit',
   });
   const { handleSubmit, control } = methods;
 

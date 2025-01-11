@@ -38,6 +38,13 @@ export default {
           },
         },
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            color: 'rgb(var(--foreground-color))',
+          },
+        },
+      },
     },
   },
   plugins: [

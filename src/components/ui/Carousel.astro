@@ -1,12 +1,14 @@
 ---
 import Image from '@/components/common/Image.astro';
 import type { Image as ImageType } from '@/types';
+import { cn } from '@/utils/utils';
 
 type Props = {
   images?: ImageType[];
+  imageClassName?: astroHTML.JSX.HTMLAttributes['class'];
 };
 
-const { images } = Astro.props;
+const { images, imageClassName } = Astro.props;
 ---
 
 <div class="embla">
@@ -16,7 +18,7 @@ const { images } = Astro.props;
         images &&
           images.map((image) => (
             <div class="embla__slide">
-              <Image class="h-screen" {...image} />
+              <Image class={cn('h-screen', imageClassName)} {...image} />
             </div>
           ))
       }

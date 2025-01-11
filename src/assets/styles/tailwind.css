@@ -130,8 +130,4 @@
   .clip-polygon {
     clip-path: polygon(95% 0, 100% 50%, 95% 100%, 0 100%, 0 0);
   }
-
-  .headline {
-    @apply border-l-4 border-primary pl-6 font-hero text-3xl font-normal md:text-5xl;
-  }
 }

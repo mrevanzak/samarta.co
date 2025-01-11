@@ -1,20 +1,18 @@
 ---
 import Carousel from '@/components/ui/Carousel.astro';
-import ContactDialog from '@/components/widgets/ContactDialog';
-import type { Hero as Props } from '@/types';
+import type { Image } from '@/types';
+import { cn } from '@/utils/utils';
 
-const { images } = Astro.props;
+type Props = {
+  images: Image[];
+  imageClassName?: astroHTML.JSX.HTMLAttributes['class'];
+};
+
+const { images, imageClassName } = Astro.props;
 ---
 
 <div class="relative">
-  <Carousel images={images} />
-  <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-background"></div>
-  <div class="absolute left-[8.3%] top-1/3 flex flex-col items-start gap-14">
-    <h1 class="font-hero text-6xl md:text-8xl md:leading-[75px]">
-      Hello, <br />
-      <span class="text-3xl md:text-5xl">Smart People!</span>
-    </h1>
-
-    <ContactDialog client:load title="Contact Us" />
-  </div>
+  <Carousel images={images} imageClassName={imageClassName} />
+  <slot name="overlay" />
+  <slot />
 </div>

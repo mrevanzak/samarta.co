@@ -38,13 +38,14 @@ apps:
 
     post:
       isEnabled: true
+      pathname: 'project'
       permalink: '/%slug%' # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
       robots:
         index: true
 
-    project:
+    list:
       isEnabled: true
-      pathname: 'project' # Blog main path, you can change this to "articles" (/articles)
+      pathname: 'project'
       robots:
         index: true
 
