@@ -1,0 +1,44 @@
+---
+import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
+import type { Project } from '@/types';
+import { getPermalink } from '@/utils/permalinks';
+import Image from '@/components/common/Image.astro';
+import { cn } from '@/utils/utils';
+
+type Props = {
+  project: Project;
+  reversed?: boolean;
+};
+
+const { project, reversed = false } = Astro.props;
+---
+
+<WidgetWrapper
+  containerClass={cn('layout flex sm:flex-row flex-col w-full md:items-center gap-6 !px-0 !mx-0 py-2 lg:py-6', {
+    'sm:flex-row-reverse': reversed,
+  })}
+>
+  <Image
+    src={project.images[0]}
+    alt={project.title}
+    class="!aspect-square h-24 max-w-md flex-1 rounded-lg sm:!aspect-video sm:h-52 md:h-72"
+  />
+  <div class="w-full min-w-60 space-y-4 sm:w-5/12">
+    <h4>{project.title}</h4>
+    <div class="line-clamp-3">
+      <project.Content />
+    </div>
+    <div class="flex flex-wrap gap-4">
+      {
+        Object.entries(project.spesifications)
+          .filter(([key]) => key !== 'client')
+          .map(([, value]) => (
+            <div class="flex items-center gap-2 rounded-lg border border-foreground px-4 py-2">
+              <div class="size-2 rounded-full bg-primary" />
+              <p class="">{value}</p>
+            </div>
+          ))
+      }
+    </div>
+  </div>
+</WidgetWrapper>
