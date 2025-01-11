@@ -9,4 +9,4 @@ type Props = {
 const { title = await Astro.slots.render('title'), className } = Astro.props;
 ---
 
-<h1 class={cn('border-l-4 border-primary pl-6 font-hero font-normal h0 layout', className)}>{title}</h1>
+<h1 class={cn('border-l-4 border-primary pl-6 font-hero font-normal h0 layout leading-snug', className)}>{title}</h1>
