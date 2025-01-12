@@ -13,6 +13,7 @@ export const generateHeaderData = async () => ({
     },
     {
       text: 'Services',
+      href: getPermalink('/service'),
       links: [
         {
           text: 'Perencanaan Konstruksi',
