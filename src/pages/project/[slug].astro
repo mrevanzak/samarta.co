@@ -2,7 +2,6 @@
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
 import Layout from '@/layouts/PageLayout.astro';
-import type { ImageMetadata } from 'astro';
 import merge from 'lodash.merge';
 
 import Headline from '@/components/ui/Headline.astro';
@@ -89,7 +88,7 @@ const metadata = merge(
     </div>
 
     <Headline title="Other Projects" className="mx-0" />
-    <ProjectsShowcase projects={otherProjects} className="mx-0" />
+    <ProjectsShowcase projects={otherProjects} className="mx-0 !py-0" />
   </section>
 </Layout>
 

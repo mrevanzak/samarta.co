@@ -42,22 +42,14 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <Hero slot="hero" images={images} imageClassName="h-[60vh]" />
+  <Hero slot="hero" images={images} imageClassName="h-[60vh]">
+    <Fragment slot="overlay">
+      <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-background"></div>
+    </Fragment>
+  </Hero>
   <section class="layout my-8 space-y-8 lg:my-16">
     <Headline title="Our Projects" className="mx-0" />
 
     {page.data.map((project, index) => <ProjectList project={project} reversed={index % 2 === 0} />)}
-    <!-- <section class="mx-auto max-w-4xl px-6 py-12 sm:px-6 sm:py-16 lg:py-20">
-    <Headline
-      subtitle="A statically generated blog example with news, tutorials, resources and other interesting content related to AstroWind"
-    >
-      The Blog
-    </Headline>
-    <BlogList posts={page.data} />
-    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
-    <!--
-      <PostTags tags={allCategories} class="mb-2" title="Search by Categories:" isCategory />
-      <PostTags tags={allTags}  title="Search by Tags:" />
-    -->
   </section>
 </Layout>
