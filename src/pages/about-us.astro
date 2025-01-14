@@ -1,0 +1,82 @@
+---
+import Layout from '@/layouts/PageLayout.astro';
+
+import Image from '@/components/common/Image.astro';
+import Headline from '@/components/ui/Headline.astro';
+import Hero from '@/components/widgets/Hero.astro';
+
+const metadata = {
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero slot="hero" images={[{ src: '@/assets/images/hero-7.png', alt: 'About Us' }]} imageClassName="h-[60vh]">
+    <Fragment slot="overlay">
+      <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-background"></div>
+    </Fragment>
+
+    <div class="absolute bottom-8 left-[5%] flex flex-col items-start gap-14">
+      <h1 class="font-hero text-5xl md:text-7xl">About Us</h1>
+    </div>
+  </Hero>
+
+  <section class="layout my-8 space-y-8 lg:my-16">
+    <div class="flex flex-col gap-6 sm:flex-row sm:gap-8 md:gap-12">
+      <div class="space-y-4">
+        <Headline title="PT Swakarya Mandiri Amerta" className="mx-0" />
+        <p class="text-balance text-justify">
+          Perusahaan konsultan spesialis yang bergerak di bidang Planning, Engineering, dan Grand Design bertaraf
+          internasional yang berkualitas, terpercaya, dan menjamin kepuasan pengguna jasa.
+        </p>
+      </div>
+      <Image src="@/assets/images/note.png" alt="Note" class="md:h h-32 md:h-44 md:!w-min md:!object-cover lg:h-48" />
+    </div>
+
+    <div
+      class="not-prose flex flex-col justify-between overflow-clip rounded-lg bg-primary text-broken-white sm:flex-row sm:gap-8 lg:gap-14"
+    >
+      <div>
+        <Image
+          src="@/assets/images/image 4.png"
+          alt="Vision"
+          class="sm:clip-polygon h-full !max-h-48 sm:!max-h-none sm:!max-w-xs"
+        />
+      </div>
+      <div class="flex flex-1 flex-col p-8 md:flex-row md:items-center md:gap-8 lg:gap-14">
+        <h1>Visi</h1>
+
+        <p class="text-balance font-normal">
+          Membangun dunia menjadi lebih baik dengan kajian analisis yang berkualitas, dan menjamin kepuasan pengguna
+          jasa
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="not-prose flex flex-col justify-between overflow-clip rounded-lg bg-primary text-broken-white md:flex-row md:gap-8 lg:gap-14"
+    >
+      <div class="flex flex-1 flex-col p-8 md:gap-8 lg:flex-row lg:gap-14">
+        <h1>Misi</h1>
+
+        <ul class="list-disc space-y-1 text-balance font-normal">
+          <li>Memastikan kepuasan pengguna jasa yang tepat sasaran dan tepat waktu</li>
+          <li>Menghasilkan produk layanan yang inovatif dan solutif</li>
+          <li>Melakukan pendampingan yang informatif dan berkelanjutan</li>
+          <li>Membangun SDM kompeten, unggul, dan berdaya saing tinggi</li>
+          <li>Membangun jaringan kerja di lingkup nasional dan internasional</li>
+        </ul>
+      </div>
+
+      <div>
+        <Image
+          src="@/assets/images/image 3.png"
+          alt="Mission"
+          class="md:clip-polygon-reverse h-full !max-h-48 !max-w-none flex-1 md:!max-h-none md:!max-w-xs"
+        />
+      </div>
+    </div>
+  </section>
+</Layout>

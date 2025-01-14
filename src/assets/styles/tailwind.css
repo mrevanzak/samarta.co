@@ -130,4 +130,9 @@
   .clip-polygon {
     clip-path: polygon(95% 0, 100% 50%, 95% 100%, 0 100%, 0 0);
   }
+
+  .clip-polygon-reverse {
+    /* reverse like mirror */
+    clip-path: polygon(5% 0, 0 50%, 5% 100%, 100% 100%, 100% 0);
+  }
 }
