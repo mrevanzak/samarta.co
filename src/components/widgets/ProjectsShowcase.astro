@@ -14,10 +14,10 @@ const { projects, className } = Astro.props;
 ---
 
 <!-- scrollable on x-axis -->
-<WidgetWrapper containerClass={cn("overflow-x-auto flex flex-row w-full layout snap-mandatory snap-x gap-6 !px-0", className)}>
+<WidgetWrapper containerClass={cn("overflow-x-auto flex flex-row w-full layout snap-mandatory snap-x gap-6 xl:px-0", className)}>
   {
     projects.map((project) => (
-      <a class="max-w-lg shrink-0 snap-start scroll-mx-6 space-y-6" href={getPermalink(project.permalink, 'project')}>
+      <a class="max-w-80 sm:max-w-96 md:max-w-lg shrink-0 snap-start scroll-mx-6 space-y-6" href={getPermalink(project.permalink, 'project')}>
         <Image src={project.images[0]} alt={project.title} class="aspect-video h-64 max-w-md rounded-lg" />
         <h4>{project.title}</h4>
         <div class="line-clamp-3">
