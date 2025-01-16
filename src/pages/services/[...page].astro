@@ -5,7 +5,7 @@ import Headline from '@/components/ui/Headline.astro';
 import Hero from '@/components/widgets/Hero.astro';
 import Service from '@/components/widgets/Service.astro';
 import Layout from '@/layouts/PageLayout.astro';
-import Caraousel from '@/components/ui/Carousel.astro';
+import ServiceShowcase from '@/components/widgets/ServiceShowcase.astro';
 import { findImage } from '@/utils/images';
 import { getStaticPathsProjectList, projectListRobots } from '@/utils/project';
 
@@ -29,20 +29,6 @@ const images = [
   },
 ];
 
-const carouselImages = [
-  {
-    src: (await findImage('@/assets/images/hero.png')) as string,
-    alt: 'Service Image 1',
-  },
-  {
-    src: (await findImage('@/assets/images/hero-2.png')) as string,
-    alt: 'Service Image 2',
-  },
-  {
-    src: (await findImage('@/assets/images/hero-3.png')) as string,
-    alt: 'Service Image 3',
-  },
-]
 
 const metadata = {
   title: `Project${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
@@ -54,6 +40,76 @@ const metadata = {
     type: 'blog',
   },
 };
+
+const otherProjects = [
+  {
+    title: 'Perencanaan Konstruksi',
+    images: [
+      '@/assets/images/hero.png'
+    ],
+    spesifications: [
+      'Commercial Buildings',
+      'Road and Bridge',
+      'Port, Airport, Industry Facility',
+      'Soil Improvement'
+    ],
+    id: 'perencanaan-konstruksi',
+    permalink: 'perencanaan-konstruksi',
+    content: [
+      'Masterplan Design',
+      'Perencanaan Desain Arsitektur dan Perancangan Struktur',
+      'Perhitungan Rencana Anggaran Biaya dan Biaya Komersil',
+      'Detail Engineering Design (DED) dan Spesifikasi Teknis',
+      'Manajemen Proyek Konstruksi',
+      'Structure Assesment'
+    ]
+  },
+  {
+    title: 'Perencanaan Tata Ruang',
+    images: [
+      '@/assets/images/hero.png'
+    ],
+    id: 'perencanaan-tata-ruang',
+    permalink: 'perencanaan-tata-ruang',
+    content: [
+      'Penyusunan Rencana Umum Tata Ruang yaitu Rencana Tata Ruang Wilayah (RTRW)',
+      'Penyusunan Rencana Rinci Tata Ruang Meliputi Rencana Detail Tata Ruang (RDTR), Rencana Tata Bangunan dan Lingkungan (RTBL), Rencana Tata Ruang Pulau/Kepulauan, Rencana Tata Ruang Kawasan Strategis (RTRKS), dan Rencana Rinci lain',
+      'Penyusunan dokumen perencanaan periodik meliputi Rencana Pembangunan Jangka Panjang (RPJP) Pembangunan Jangka Menengah (RPJM)'
+    ]
+  },
+  {
+    title: 'Standar Harga dan RKBMD',
+    images: [ '@/assets/images/hero.png' ],
+    spesifications: [
+      'SSH & SBU',
+      'HSPK',
+      'ASB Fisik dan Non Fisik',
+      'SKBMD'
+    ],
+    id: 'standar-harga-dan-rkbmd',
+    permalink: 'standar-harga-dan-rkbmd',
+    content: [
+      'Masterplan Design',
+      'Perencanaan Desain Arsitektur dan Perancangan Struktur',
+      'Perhitungan Rencana Anggaran Biaya dan Biaya Komersil',
+      'Detail Engineering Design (DED) dan Spesifikasi Teknis',
+      'Manajemen Proyek Konstruksi',
+      'Structure Assesment'
+    ]
+  },
+  {
+    title: 'Analisa Dampak Ruang',
+    images: [ '@/assets/images/hero.png' ],
+    id: 'analisa-dampak-ruang',
+    permalink: 'analisa-dampak-ruang',
+    content: [
+      'Penyusunan Kajian Lingkungan Hidup Strategis (KLHS)',
+      'Penyusunan Dokumen Analisis Dampak Lingkungan (AMDAL)',
+      'Penyusunan Upaya Pengelolaan Lingkungan dan Upaya Pemantauan Lingkungan (UKL/UPL)',
+      'Surat Pernyataan Kesanggupan Pengelolaan dan Pemantauan Lingkungan Hidup (SPPL)',
+    ]
+  }
+]
 ---
 
 <Layout metadata={metadata}>
@@ -64,9 +120,6 @@ const metadata = {
   </Hero>
   <section class="layout my-8 space-y-8 lg:my-16">
     <Headline title="Our Services" className="mx-0" />
-
-    <!-- {page.data.map((project, index) => <ProjectList project={project} reversed={index % 2 === 0} />)} -->
-    <!-- {page.data.map((service, index) => <Service service={service} reversed={index % 2 === 0} />)} -->
     <Service
       reversed
       className="!pt-0"
@@ -170,6 +223,6 @@ const metadata = {
         },
       ]}
     />
-    <Caraousel images={carouselImages}/>
+    <ServiceShowcase projects={otherProjects}/>
   </section>
 </Layout>

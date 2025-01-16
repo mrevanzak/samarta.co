@@ -2,10 +2,81 @@
 import Layout from '@/layouts/PageLayout.astro';
 import Hero from '@/components/widgets/Hero.astro';
 import Headline from '@/components/ui/Headline.astro';
+import ServiceShowcase from '@/components/widgets/ServiceShowcase.astro';
 
 const metadata = {
     ignoreTitleTemplate: true,
 };
+
+const otherProjects = [
+  {
+    title: 'Perencanaan Konstruksi',
+    images: [
+      '@/assets/images/hero.png'
+    ],
+    spesifications: [
+      'Commercial Buildings',
+      'Road and Bridge',
+      'Port, Airport, Industry Facility',
+      'Soil Improvement'
+    ],
+    id: 'perencanaan-konstruksi',
+    permalink: 'perencanaan-konstruksi',
+    content: [
+      'Masterplan Design',
+      'Perencanaan Desain Arsitektur dan Perancangan Struktur',
+      'Perhitungan Rencana Anggaran Biaya dan Biaya Komersil',
+      'Detail Engineering Design (DED) dan Spesifikasi Teknis',
+      'Manajemen Proyek Konstruksi',
+      'Structure Assesment'
+    ]
+  },
+  {
+    title: 'Perencanaan Tata Ruang',
+    images: [
+      '@/assets/images/hero.png'
+    ],
+    id: 'perencanaan-tata-ruang',
+    permalink: 'perencanaan-tata-ruang',
+    content: [
+      'Penyusunan Rencana Umum Tata Ruang yaitu Rencana Tata Ruang Wilayah (RTRW)',
+      'Penyusunan Rencana Rinci Tata Ruang Meliputi Rencana Detail Tata Ruang (RDTR), Rencana Tata Bangunan dan Lingkungan (RTBL), Rencana Tata Ruang Pulau/Kepulauan, Rencana Tata Ruang Kawasan Strategis (RTRKS), dan Rencana Rinci lain',
+      'Penyusunan dokumen perencanaan periodik meliputi Rencana Pembangunan Jangka Panjang (RPJP) Pembangunan Jangka Menengah (RPJM)'
+    ]
+  },
+  {
+    title: 'Standar Harga dan RKBMD',
+    images: [ '@/assets/images/hero.png' ],
+    spesifications: [
+      'SSH & SBU',
+      'HSPK',
+      'ASB Fisik dan Non Fisik',
+      'SKBMD'
+    ],
+    id: 'standar-harga-dan-rkbmd',
+    permalink: 'standar-harga-dan-rkbmd',
+    content: [
+      'Masterplan Design',
+      'Perencanaan Desain Arsitektur dan Perancangan Struktur',
+      'Perhitungan Rencana Anggaran Biaya dan Biaya Komersil',
+      'Detail Engineering Design (DED) dan Spesifikasi Teknis',
+      'Manajemen Proyek Konstruksi',
+      'Structure Assesment'
+    ]
+  },
+  {
+    title: 'Analisa Dampak Ruang',
+    images: [ '@/assets/images/hero.png' ],
+    id: 'analisa-dampak-ruang',
+    permalink: 'analisa-dampak-ruang',
+    content: [
+      'Penyusunan Kajian Lingkungan Hidup Strategis (KLHS)',
+      'Penyusunan Dokumen Analisis Dampak Lingkungan (AMDAL)',
+      'Penyusunan Upaya Pengelolaan Lingkungan dan Upaya Pemantauan Lingkungan (UKL/UPL)',
+      'Surat Pernyataan Kesanggupan Pengelolaan dan Pemantauan Lingkungan Hidup (SPPL)',
+    ]
+  }
+]
 ---
 <Layout metadata={metadata}>
     <Hero slot="hero" images={[{ src: '@/assets/images/hero.png', alt: 'Our Services' }]} imageClassName="h-[60vh]" dotsClassName="bottom-4"/>
@@ -47,5 +118,6 @@ const metadata = {
         </div>
 
         <Headline title="Other Services" className="mx-0" />
+        <ServiceShowcase projects={otherProjects}/>
     </section>
 </Layout>
