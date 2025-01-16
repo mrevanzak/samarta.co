@@ -17,19 +17,19 @@ export const generateHeaderData = async () => ({
       links: [
         {
           text: 'Perencanaan Konstruksi',
-          href: getPermalink('/service/perencanaan-konstruksi'),
+          href: getPermalink('/services/perencanaan-konstruksi'),
         },
         {
           text: 'Perencanaan Tata Ruang',
-          href: getPermalink('/service/perencanaan-tata-ruang'),
+          href: getPermalink('/services/perencanaan-tata-ruang'),
         },
         {
           text: 'Standar Harga dan RKBMD',
-          href: getPermalink('/service/standar-harga-dan-rkbmd'),
+          href: getPermalink('/services/standar-harga-dan-rkbmd'),
         },
         {
           text: 'Analisa Dampak Ruang',
-          href: getPermalink('/service/analisa-dampak-ruang'),
+          href: getPermalink('/services/analisa-dampak-ruang'),
         },
       ],
     },
