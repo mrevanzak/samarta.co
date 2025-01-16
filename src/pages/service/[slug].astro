@@ -1,0 +1,76 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+
+import merge from 'lodash.merge';
+
+import Hero from '@/components/widgets/Hero.astro';
+import Layout from '@/layouts/PageLayout.astro';
+
+import Headline from '@/components/ui/Headline.astro';
+import ServiceShowcase from '@/components/widgets/ServiceShowcase.astro';
+import type { MetaData } from '@/types';
+import { projectPostRobots } from '@/utils/project';
+import { getServices, getStaticPathsServicePost } from '@/utils/service';
+
+export const prerender = true;
+
+export const getStaticPaths = (async () => {
+  return await getStaticPathsServicePost();
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { service } = Astro.props;
+
+const otherServices = getServices().filter((s) => s.permalink !== service.permalink);
+
+const metadata = merge({
+  title: service.title,
+  description: service.contents.join(' '),
+  robots: {
+    index: projectPostRobots?.index,
+    follow: projectPostRobots?.follow,
+  },
+  openGraph: {
+    type: 'article',
+  },
+}) as MetaData;
+---
+
+<Layout metadata={metadata}>
+  <Hero slot="hero" images={service.images} imageClassName="h-[60vh]" dotsClassName="bottom-4" />
+  <section class="layout my-8 space-y-16 lg:my-16">
+    <div class="space-y-8">
+      <Headline title={service.title} className="mx-0" />
+      <div class="flex flex-1 flex-row flex-wrap gap-12">
+        {
+          service.contents.map((content) => (
+            <div class="min-w-80 flex-1 space-y-2">
+              <h4>{content.heading}</h4>
+              {content.type === 'list' ? (
+                <ul class="list-disc">
+                  {content.point.map((point) => (
+                    <li class="ml-4">{point}</li>
+                  ))}
+                </ul>
+              ) : (
+                <div class="flex flex-wrap gap-4">
+                  {content.point.map((point) => (
+                    <div class="flex items-center gap-2 rounded-lg border border-background bg-orange-700 px-4 py-2">
+                      <div class="size-2 rounded-full bg-primary" />
+                      <p class="">{point}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <div class="space-y-8">
+      <Headline title="Other Services" className="mx-0" />
+      <ServiceShowcase services={otherServices} />
+    </div>
+  </section>
+</Layout>

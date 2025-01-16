@@ -1,0 +1,54 @@
+---
+import Image from '@/components/common/Image.astro';
+import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
+import type { Service } from '@/types';
+import { getPermalink } from '@/utils/permalinks';
+import { cn } from '@/utils/utils';
+
+type Props = {
+  services: Service[];
+  className?: string;
+};
+
+const { services, className } = Astro.props;
+---
+
+<!-- scrollable on x-axis -->
+<WidgetWrapper
+  containerClass={cn('overflow-x-auto flex flex-row w-full layout snap-mandatory snap-x gap-6 xl:px-0 !py-0', className)}
+>
+  {
+    services.map((service) => (
+      <a
+        class="max-w-80 shrink-0 snap-start scroll-mx-6 space-y-6 sm:max-w-96 md:max-w-lg"
+        href={getPermalink(service.permalink, 'services')}
+      >
+        <Image src={service.images[0].src} alt={service.title} class="aspect-video h-64 max-w-md rounded-lg" />
+        <h4>{service.title}</h4>
+        <div class="flex flex-1 flex-row flex-wrap gap-4">
+          {service.contents.map((content) => (
+            <div class="min-w-80 flex-1 space-y-2 line-clamp-5">
+              <h4>{content.heading}</h4>
+              {content.type === 'list' ? (
+                <ul class="list-disc">
+                  {content.point.map((point) => (
+                    <li class="ml-4">{point}</li>
+                  ))}
+                </ul>
+              ) : (
+                <div class="flex flex-wrap gap-4">
+                  {content.point.map((point) => (
+                    <div class="flex items-center gap-2 rounded-lg border border-background bg-orange-700 px-4 py-2">
+                      <div class="size-2 rounded-full bg-primary" />
+                      <p class="">{point}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </a>
+    ))
+  }
+</WidgetWrapper>

@@ -1,42 +1,23 @@
----
-import Layout from '@/layouts/PageLayout.astro';
+import type { Service } from '@/types';
 
-import Headline from '@/components/ui/Headline.astro';
-import Hero from '@/components/widgets/Hero.astro';
-import Service from '@/components/widgets/Service.astro';
-
-const metadata = {
-  ignoreTitleTemplate: true,
+export const getStaticPathsServicePost = async () => {
+  return getServices().flatMap((service) => {
+    return {
+      params: {
+        slug: service.permalink,
+      },
+      props: { service },
+    };
+  });
 };
----
 
-<Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
-
-  <Hero
-    slot="hero"
-    images={[{ src: '@/assets/images/hero-6.png', alt: 'Our Services' }]}
-    imageClassName="h-[60vh]"
-    dotsClassName="bottom-4"
-  >
-    <Fragment slot="overlay">
-      <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-background"></div>
-    </Fragment>
-  </Hero>
-  <section class="layout my-8 space-y-8 lg:my-16">
-    <!-- Services Widget *************** -->
-
-    <Headline title="Our Services" className="mx-0" />
-    <Service
-      reversed
-      className="!pt-0"
-      title="Perencanaan Konstruksi"
-      images={[
-        { src: '@/assets/images/hero.png', alt: 'Service Image 1' },
-        // { src: '@/assets/images/hero-2.png', alt: 'Service Image 2' },
-        // { src: '@/assets/images/hero-3.png', alt: 'Service Image 3' },
-      ]}
-      contents={[
+export function getServices(): Service[] {
+  return [
+    {
+      title: 'Perencanaan Konstruksi',
+      images: [{ src: '@/assets/images/hero.png', alt: 'Service Image 1' }],
+      permalink: 'perencanaan-konstruksi',
+      contents: [
         {
           heading: 'Ruang Lingkup',
           type: 'list',
@@ -59,17 +40,14 @@ const metadata = {
             'Soil Improvement',
           ],
         },
-      ]}
-    />
+      ],
+    },
+    {
+      title: 'Perencanaan Tata Ruang',
+      images: [{ src: '@/assets/images/hero.png', alt: 'Service Image 1' }],
 
-    <Service
-      title="Perencanaan Tata Ruang"
-      images={[
-        { src: '@/assets/images/hero.png', alt: 'Service Image 1' },
-        // { src: '@/assets/images/hero-2.png', alt: 'Service Image 2' },
-        // { src: '@/assets/images/hero-3.png', alt: 'Service Image 3' },
-      ]}
-      contents={[
+      permalink: 'perencanaan-tata-ruang',
+      contents: [
         {
           heading: 'Ruang Lingkup',
           type: 'list',
@@ -79,18 +57,13 @@ const metadata = {
             'Penyusunan dokumen perencanaan periodik meliputi Rencana Pembangunan Jangka Panjang (RPJP) Pembangunan Jangka Menengah (RPJM)',
           ],
         },
-      ]}
-    />
-
-    <Service
-      reversed
-      title="Standar Harga dan RKBMD"
-      images={[
-        { src: '@/assets/images/hero.png', alt: 'Service Image 1' },
-        // { src: '@/assets/images/hero-2.png', alt: 'Service Image 2' },
-        // { src: '@/assets/images/hero-3.png', alt: 'Service Image 3' },
-      ]}
-      contents={[
+      ],
+    },
+    {
+      title: 'Standar Harga dan RKBMD',
+      permalink: 'standar-harga-dan-rkbmd',
+      images: [{ src: '@/assets/images/hero.png', alt: 'Service Image 1' }],
+      contents: [
         {
           heading: 'Ruang Lingkup',
           type: 'list',
@@ -107,17 +80,13 @@ const metadata = {
           type: 'label',
           point: ['SSH & SBU', 'HSPPK', 'ASB Fisik dan Non Fisik', 'SKBMD'],
         },
-      ]}
-    />
-
-    <Service
-      title="Analisa Dampak Ruang"
-      images={[
-        { src: '@/assets/images/hero.png', alt: 'Service Image 1' },
-        // { src: '@/assets/images/hero-2.png', alt: 'Service Image 2' },
-        // { src: '@/assets/images/hero-3.png', alt: 'Service Image 3' },
-      ]}
-      contents={[
+      ],
+    },
+    {
+      title: 'Analisa Dampak Ruang',
+      images: [{ src: '@/assets/images/hero.png', alt: 'Service Image 1' }],
+      permalink: 'analisa-dampak-ruang',
+      contents: [
         {
           heading: 'Ruang Lingkup',
           type: 'list',
@@ -128,7 +97,7 @@ const metadata = {
             'Surat Pernyataan Kesanggupan Pengelolaan dan Pemantauan Lingkungan Hidup (SPPL)',
           ],
         },
-      ]}
-    />
-  </section>
-</Layout>
+      ],
+    },
+  ];
+}
