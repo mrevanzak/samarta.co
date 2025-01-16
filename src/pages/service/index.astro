@@ -1,0 +1,51 @@
+---
+import Headline from '@/components/ui/Headline.astro';
+import Hero from '@/components/widgets/Hero.astro';
+import Service from '@/components/widgets/Service.astro';
+import Layout from '@/layouts/PageLayout.astro';
+import { findImage } from '@/utils/images';
+import { getServices } from '@/utils/service';
+import { cn } from '@/utils/utils';
+
+const images = [
+  {
+    src: (await findImage('@/assets/images/hero-6.png')) as string,
+    alt: 'Our Services',
+  },
+];
+
+const metadata = {
+  title: 'Services',
+  robots: {
+    index: true,
+  },
+  openGraph: {
+    type: 'blog',
+  },
+};
+
+const services = getServices();
+---
+
+<Layout metadata={metadata}>
+  <Hero slot="hero" images={images} imageClassName="h-[60vh]">
+    <Fragment slot="overlay">
+      <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-background"></div>
+    </Fragment>
+  </Hero>
+  <section class="layout my-8 space-y-8 lg:my-16">
+    <Headline title="Our Services" className="mx-0" />
+    {
+      services.map((service, index) => (
+        <Service
+          title={service.title}
+          images={service.images}
+          contents={service.contents}
+          reversed={index % 2 === 0}
+          className={cn({ '!pt-0': index === 0 })}
+          titleClassName='mx-0'
+        />
+      ))
+    }
+  </section>
+</Layout>

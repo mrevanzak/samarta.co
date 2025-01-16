@@ -1,6 +1,17 @@
+import type { fetchPosts } from '@/utils/project';
 import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
 import type { HTMLAttributes, ImageMetadata } from 'astro/types';
-import type { fetchPosts } from '@/utils/project';
+
+export type Service = {
+  title: string;
+  images: Image[];
+  permalink: string;
+  contents: {
+    heading: string;
+    type: 'list' | 'label';
+    point: string[];
+  }[];
+};
 
 export type Project = Awaited<ReturnType<typeof fetchPosts>>[number];
 export interface Post {
