@@ -1,32 +1,72 @@
 ---
-import Layout from '@/layouts/PageLayout.astro';
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
 import Headline from '@/components/ui/Headline.astro';
 import Hero from '@/components/widgets/Hero.astro';
 import Service from '@/components/widgets/Service.astro';
+import Layout from '@/layouts/PageLayout.astro';
+import Caraousel from '@/components/ui/Carousel.astro';
+import { findImage } from '@/utils/images';
+import { getStaticPathsProjectList, projectListRobots } from '@/utils/project';
+
+export const prerender = true;
+
+export const getStaticPaths = (async ({ paginate }) => {
+  return await getStaticPathsProjectList({ paginate });
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { page } = Astro.props;
+const currentPage = page.currentPage ?? 1;
+
+// const allCategories = await findCategories();
+// const allTags = await findTags();
+const images = [
+  {
+    src: (await findImage('@/assets/images/hero-6.png')) as string,
+    alt: 'Our Services',
+  },
+];
+
+const carouselImages = [
+  {
+    src: (await findImage('@/assets/images/hero.png')) as string,
+    alt: 'Service Image 1',
+  },
+  {
+    src: (await findImage('@/assets/images/hero-2.png')) as string,
+    alt: 'Service Image 2',
+  },
+  {
+    src: (await findImage('@/assets/images/hero-3.png')) as string,
+    alt: 'Service Image 3',
+  },
+]
 
 const metadata = {
-  ignoreTitleTemplate: true,
+  title: `Project${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
+  robots: {
+    index: projectListRobots?.index && currentPage === 1,
+    follow: projectListRobots?.follow,
+  },
+  openGraph: {
+    type: 'blog',
+  },
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
-
-  <Hero
-    slot="hero"
-    images={[{ src: '@/assets/images/hero-6.png', alt: 'Our Services' }]}
-    imageClassName="h-[60vh]"
-    dotsClassName="bottom-4"
-  >
+  <Hero slot="hero" images={images} imageClassName="h-[60vh]">
     <Fragment slot="overlay">
       <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-background"></div>
     </Fragment>
   </Hero>
   <section class="layout my-8 space-y-8 lg:my-16">
-    <!-- Services Widget *************** -->
-
     <Headline title="Our Services" className="mx-0" />
+
+    <!-- {page.data.map((project, index) => <ProjectList project={project} reversed={index % 2 === 0} />)} -->
+    <!-- {page.data.map((service, index) => <Service service={service} reversed={index % 2 === 0} />)} -->
     <Service
       reversed
       className="!pt-0"
@@ -130,5 +170,6 @@ const metadata = {
         },
       ]}
     />
+    <Caraousel images={carouselImages}/>
   </section>
 </Layout>
