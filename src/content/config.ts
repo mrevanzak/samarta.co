@@ -46,7 +46,7 @@ const metadataDefinition = () =>
     })
     .optional();
 
-const postCollection = defineCollection({
+const projectCollection = defineCollection({
   loader: glob({ pattern: ['*.md', '*.mdx'], base: 'src/data/project' }),
   schema: z.object({
     publishDate: z.date().optional(),
@@ -66,6 +66,19 @@ const postCollection = defineCollection({
   }),
 });
 
+const serviceCollection = defineCollection({
+  loader: glob({ pattern: ['*.md', '*.mdx'], base: 'src/data/service' }),
+  schema: z.object({
+    publishDate: z.date().optional(),
+
+    title: z.string(),
+    images: z.array(z.string()).min(1),
+
+    metadata: metadataDefinition(),
+  }),
+});
+
 export const collections = {
-  post: postCollection,
+  project: projectCollection,
+  service: serviceCollection,
 };

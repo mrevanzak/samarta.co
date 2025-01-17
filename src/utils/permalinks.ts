@@ -21,11 +21,11 @@ export const cleanSlug = (text = '') =>
     .map((slug) => slugify(slug))
     .join('/');
 
-export const PROJECT_BASE = cleanSlug(APP_BLOG?.list?.pathname);
+export const PROJECT_BASE = cleanSlug(APP_BLOG?.project.list?.pathname);
 export const CATEGORY_BASE = cleanSlug(APP_BLOG?.category?.pathname);
 export const TAG_BASE = cleanSlug(APP_BLOG?.tag?.pathname) || 'tag';
 
-export const POST_PERMALINK_PATTERN = trimSlash(APP_BLOG?.post?.permalink || `${PROJECT_BASE}/%slug%`);
+export const POST_PERMALINK_PATTERN = trimSlash(APP_BLOG?.project.post?.permalink || `${PROJECT_BASE}/%slug%`);
 
 /** */
 export const getCanonical = (path = ''): string | URL => {

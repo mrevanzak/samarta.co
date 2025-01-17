@@ -40,7 +40,7 @@ const generatePermalink = async ({
     .join('/');
 };
 
-const getNormalizedPost = async (post: CollectionEntry<'post'>) => {
+const getNormalizedPost = async (post: CollectionEntry<'project'>) => {
   const { id, data } = post;
   const { Content, remarkPluginFrontmatter } = await render(post);
 
@@ -70,7 +70,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>) => {
 };
 
 const load = async () => {
-  const posts = await getCollection('post');
+  const posts = await getCollection('project');
   const normalizedPosts = posts.map(async (post) => await getNormalizedPost(post));
 
   const results = (await Promise.all(normalizedPosts)).sort(
@@ -84,18 +84,18 @@ let _posts: Awaited<ReturnType<typeof load>>;
 
 /** */
 export const isProjectEnabled = APP_BLOG.isEnabled;
-export const isRelatedPostsEnabled = APP_BLOG.isRelatedPostsEnabled;
-export const isProjectListRouteEnabled = APP_BLOG.list.isEnabled;
-export const isProjectPostRouteEnabled = APP_BLOG.post.isEnabled;
-export const isProjectCategoryRouteEnabled = APP_BLOG.category.isEnabled;
-export const isProjectTagRouteEnabled = APP_BLOG.tag.isEnabled;
+export const isRelatedPostsEnabled = APP_BLOG.project.isRelatedPostsEnabled;
+export const isProjectListRouteEnabled = APP_BLOG.project.list.isEnabled;
+export const isProjectPostRouteEnabled = APP_BLOG.project.post.isEnabled;
+export const isProjectCategoryRouteEnabled = APP_BLOG.project.category.isEnabled;
+export const isProjectTagRouteEnabled = APP_BLOG.project.tag.isEnabled;
 
-export const projectListRobots = APP_BLOG.list.robots;
-export const projectPostRobots = APP_BLOG.post.robots;
-export const projectCategoryRobots = APP_BLOG.category.robots;
-export const projectTagRobots = APP_BLOG.tag.robots;
+export const projectListRobots = APP_BLOG.project.list.robots;
+export const projectPostRobots = APP_BLOG.project.post.robots;
+export const projectCategoryRobots = APP_BLOG.project.category.robots;
+export const projectTagRobots = APP_BLOG.project.tag.robots;
 
-export const projectPostsPerPage = APP_BLOG?.postsPerPage;
+export const projectPostsPerPage = APP_BLOG.project?.postsPerPage;
 
 /** */
 export const fetchPosts = async () => {

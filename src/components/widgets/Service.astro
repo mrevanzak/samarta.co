@@ -14,16 +14,17 @@ type Props = {
   }[];
   reversed?: boolean;
   className?: astroHTML.JSX.HTMLAttributes['class'];
+  titleClassName?: astroHTML.JSX.HTMLAttributes['class'];
 };
 
-const { title, images, contents, reversed = false, className } = Astro.props;
+const { title, images, contents, reversed = false, className, titleClassName } = Astro.props;
 ---
 
 <WidgetWrapper containerClass={cn('flex gap-8 flex-col !px-0 py-8 w-100vw', className)}>
   <h1
     class={cn('text-end layout', {
       'text-start': reversed,
-    })}
+    },titleClassName)}
   >
     {title}
   </h1>
