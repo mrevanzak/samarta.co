@@ -43,7 +43,7 @@ export const generateHeaderData = async () => ({
     },
     {
       text: 'Contact Us',
-      href: getPermalink('/contact-us'),
+      href: getPermalink('?contact-us'),
     },
   ],
 });
