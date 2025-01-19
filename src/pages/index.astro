@@ -2,6 +2,7 @@
 import Layout from '@/layouts/PageLayout.astro';
 
 import Headline from '@/components/ui/Headline.astro';
+import { Button } from '@/components/ui/react/Button';
 import ContactDialog from '@/components/widgets/ContactDialog';
 import Hero from '@/components/widgets/Hero.astro';
 import Note from '@/components/widgets/Note.astro';
@@ -39,7 +40,7 @@ const latestProject = await findLatestPosts({
         <span class="h1">Smart People!</span>
       </h1>
 
-      <ContactDialog client:load title="Contact Us" />
+      <Button className="bg-primary text-white"><a href="?contact-us"> Contact Us</a> </Button>
     </div>
   </Hero>
 
@@ -157,4 +158,6 @@ const latestProject = await findLatestPosts({
 
   <Headline title="Our Projects" />
   <ProjectsShowcase projects={latestProject} />
+
+  <ContactDialog client:load />
 </Layout>
