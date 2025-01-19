@@ -2,8 +2,7 @@ import { z } from 'astro/zod';
 import * as React from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 
-import { actions } from 'astro:actions';
-import { navigate } from 'astro:transitions/client';
+import { WHATSAPP_NUMBER } from 'astro:env/client';
 import { Button } from '@/components/ui/react/Button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/react/Dialog';
 import {
@@ -80,11 +79,9 @@ function ContactUsForm() {
       <form
         className="space-y-4"
         onSubmit={handleSubmit(async (data) => {
-          const { error } = await actions.contact(data);
-          if (!error) {
-            alert('Thank you for contacting us!');
-            navigate('/');
-          }
+          const baseUrl = `https://wa.me/${WHATSAPP_NUMBER}`;
+          const message = `Halo Samarta! Saya ingin bertanya lebih lanjut:\n\n- *Name*: ${data.name}\n- *Company*: ${data.company}\n- *Email*: ${data.email}\n- *Phone*: ${data.phone}\n- *Message*: ${data.message}\n\nThank you!\n`;
+          window.open(`${baseUrl}?text=${encodeURIComponent(message)}`, '_blank');
         })}
       >
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
