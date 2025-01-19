@@ -15,7 +15,11 @@ export function getServices(): Service[] {
   return [
     {
       title: 'Perencanaan Konstruksi',
-      images: [{ src: '@/assets/images/hero.png', alt: 'Service Image 1' }],
+      images: [
+        { src: '@/assets/images/image 6.png', alt: 'Perencanaan Konstruksi' },
+        { src: '@/assets/images/jeriden-villegas-niSnhfMjiMI-unsplash.png', alt: 'Perencanaan Konstruksi 2' },
+        { src: '@/assets/images/glenov-brankovic-DWp5nUqTn6E-unsplash.png', alt: 'Perencanaan Konstruksi 3' },
+      ],
       permalink: 'perencanaan-konstruksi',
       contents: [
         {
@@ -44,8 +48,11 @@ export function getServices(): Service[] {
     },
     {
       title: 'Perencanaan Tata Ruang',
-      images: [{ src: '@/assets/images/hero.png', alt: 'Service Image 1' }],
-
+      images: [
+        { src: '@/assets/images/image 5.png', alt: 'Perencanaan Tata Ruang' },
+        { src: '@/assets/images/tolu-olubode-PlBsJ5MybGc-unsplash 1.png', alt: 'Perencanaan Tata Ruang 2' },
+        { src: '@/assets/images/yuvraj-singh-vpy06JksHw8-unsplash 2.png', alt: 'Perencanaan Tata Ruang 3' },
+      ],
       permalink: 'perencanaan-tata-ruang',
       contents: [
         {
@@ -62,7 +69,11 @@ export function getServices(): Service[] {
     {
       title: 'Standar Harga dan RKBMD',
       permalink: 'standar-harga-dan-rkbmd',
-      images: [{ src: '@/assets/images/hero.png', alt: 'Service Image 1' }],
+      images: [
+        { src: '@/assets/images/anthony-tuil-5d2JJyEYKQ8-unsplash 1.png', alt: 'Standar Harga dan RKBMD' },
+        { src: '@/assets/images/ryan-ancill-nGsVMkRatgM-unsplash 1.png', alt: 'Standar Harga dan RKBMD 2' },
+        { src: '@/assets/images/aaron-lefler-ySZdYkPGEbs-unsplash 2.png', alt: 'Standar Harga dan RKBMD 3' },
+      ],
       contents: [
         {
           heading: 'Ruang Lingkup',
@@ -84,7 +95,11 @@ export function getServices(): Service[] {
     },
     {
       title: 'Analisa Dampak Ruang',
-      images: [{ src: '@/assets/images/hero.png', alt: 'Service Image 1' }],
+      images: [
+        { src: '@/assets/images/thisisengineering-zIL_CiC-bT0-unsplash 1.png', alt: 'Analisa Dampak Ruang' },
+        { src: '@/assets/images/chuttersnap-NMrUtSA7094-unsplash 2.png', alt: 'Analisa Dampak Ruang 2' },
+        { src: '@/assets/images/miguel-picq-gpX-8rCByMw-unsplash 2.png', alt: 'Analisa Damapak Ruang 3' },
+      ],
       permalink: 'analisa-dampak-ruang',
       contents: [
         {

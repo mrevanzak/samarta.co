@@ -20,7 +20,7 @@ const { images, imageClassName, dotsClassName } = Astro.props;
         images &&
           images.map((image) => (
             <div class="embla__slide">
-              <Image class={cn('h-screen', imageClassName)} {...image} />
+              <Image class={cn('h-screen !max-w-none', imageClassName)} {...image} />
             </div>
           ))
       }
