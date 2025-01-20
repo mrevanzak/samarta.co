@@ -27,7 +27,7 @@ const StackedCarouselTSX: React.FC<StackedCarouselProps> = ({ images }) => {
   return (
     <div className="relative flex w-full flex-col items-center">
       {/* Carousel Images */}
-      <div className="relative flex w-full left-20 bottom-56 md:left-28 md:bottom-28">
+      <div className="relative flex w-full left-20 bottom-56 sm:left-2 sm:bottom-10 md:bottom-9 lg:left-28 lg:bottom-28">
         {images.map((image, index) => (
           <div
             key={index}
@@ -60,7 +60,7 @@ const StackedCarouselTSX: React.FC<StackedCarouselProps> = ({ images }) => {
             <img
               src={image.src}
               alt={image.alt || `Slide ${index + 1}`}
-              className="rounded-lg shadow-lg aspect-[2/3] w-40 sm:w-52 md:w-72 object-cover hover:cursor-pointer"
+              className="rounded-lg shadow-lg aspect-[2/3] w-40 sm:w-52 md:w-60 lg:w-72 object-cover hover:cursor-pointer"
             />
           </div>
         ))}

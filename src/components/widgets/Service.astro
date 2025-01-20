@@ -32,7 +32,7 @@ const { title, images, contents, reversed = false, className, titleClassName } =
   >
     {title}
   </h1>
-  <div class="bg-primary py-8 md:py-14 pt-64 md:min-h-[26rem]">
+  <div class="bg-primary py-8 sm:py-14 pt-64 md:min-h-[26rem]">
     <div class={cn('layout flex sm:flex-row flex-col gap-6', { 'sm:flex-row-reverse': reversed })}>
       <div class="flex flex-1">
         <StackedCarouselTSX images={images} client:load />
