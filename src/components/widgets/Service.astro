@@ -1,8 +1,8 @@
 ---
+import StackedCarousel from '@/components/ui/StackedCarousel';
 import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
 import type { Image as ImageType } from '@/types';
 import { cn } from '@/utils/utils';
-import StackedCarouselTSX from '../ui/StackedCarousel.tsx';
 
 type Props = {
   title: string;
@@ -32,10 +32,10 @@ const { title, images, contents, reversed = false, className, titleClassName } =
   >
     {title}
   </h1>
-  <div class="bg-primary py-8 sm:py-14 pt-64 md:min-h-[26rem]">
+  <div class="bg-primary py-8 pt-64 sm:py-14 md:min-h-[26rem]">
     <div class={cn('layout flex sm:flex-row flex-col gap-6', { 'sm:flex-row-reverse': reversed })}>
       <div class="flex flex-1">
-        <StackedCarouselTSX images={images} client:load />
+        <StackedCarousel images={images} client:load />
       </div>
       <div class="flex flex-1 flex-col space-y-12">
         <div class="space-y-4">

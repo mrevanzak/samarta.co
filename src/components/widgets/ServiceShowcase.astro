@@ -24,7 +24,7 @@ const { services, className } = Astro.props;
   {
     services.map((service) => (
       <a
-        class="dark:hover:bg-dark group relative max-w-80 shrink-0 snap-start scroll-mx-6 space-y-6 rounded-lg p-4 transition-colors duration-500 hover:bg-orange-100 sm:max-w-96 md:max-w-lg"
+        class="dark:hover:bg-dark group relative max-w-80 shrink-0 snap-center sm:snap-start scroll-mx-6 space-y-6 rounded-lg p-4 transition-colors duration-500 hover:bg-orange-100 sm:max-w-96 md:max-w-lg"
         href={getPermalink(service.permalink, 'services')}
       >
         <div class="overflow-hidden">
