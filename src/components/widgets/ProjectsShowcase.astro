@@ -4,6 +4,7 @@ import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
 import { type Project } from '@/types';
 import { getPermalink } from '@/utils/permalinks';
 import { cn } from '@/utils/utils';
+import { Icon } from 'astro-icon/components';
 
 type Props = {
   projects: Project[];
@@ -14,11 +15,25 @@ const { projects, className } = Astro.props;
 ---
 
 <!-- scrollable on x-axis -->
-<WidgetWrapper containerClass={cn("overflow-x-auto flex flex-row w-full layout snap-mandatory snap-x gap-6 xl:px-0", className)}>
+<WidgetWrapper
+  containerClass={cn('overflow-x-auto flex flex-row w-full layout snap-mandatory snap-x gap-4 xl:px-0', className)}
+>
   {
     projects.map((project) => (
-      <a class="max-w-80 sm:max-w-96 md:max-w-lg shrink-0 snap-start scroll-mx-6 space-y-6" href={getPermalink(project.permalink, 'project')}>
-        <Image src={project.images[0]} alt={project.title} class="aspect-video h-64 max-w-md rounded-lg" />
+      <a
+        class="dark:hover:bg-dark group relative max-w-80 shrink-0 snap-start scroll-mx-6 space-y-6 rounded-lg p-4 transition-colors duration-500 hover:bg-orange-100 sm:max-w-96 md:max-w-lg"
+        href={getPermalink(project.permalink, 'project')}
+      >
+        <div class="overflow-hidden">
+          <Image
+            src={project.images[0]}
+            alt={project.title}
+            class="aspect-video h-64 max-w-md rounded-lg transition-transform duration-500 group-hover:scale-110"
+          />
+        </div>
+        <div class="absolute right-6 top-0 flex h-8 w-14 justify-center rounded-full bg-primary opacity-0 transition-all duration-500 group-hover:opacity-100">
+          <Icon name="tabler:arrow-right" class="size-6 self-center text-white" />
+        </div>
         <h4>{project.title}</h4>
         <div class="line-clamp-3">
           <project.Content />

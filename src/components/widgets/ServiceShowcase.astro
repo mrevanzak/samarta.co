@@ -4,6 +4,7 @@ import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
 import type { Service } from '@/types';
 import { getPermalink } from '@/utils/permalinks';
 import { cn } from '@/utils/utils';
+import { Icon } from 'astro-icon/components';
 
 type Props = {
   services: Service[];
@@ -15,19 +16,31 @@ const { services, className } = Astro.props;
 
 <!-- scrollable on x-axis -->
 <WidgetWrapper
-  containerClass={cn('overflow-x-auto flex flex-row w-full layout snap-mandatory snap-x gap-6 xl:px-0 !py-0', className)}
+  containerClass={cn(
+    'overflow-x-auto flex flex-row w-full layout snap-mandatory snap-x gap-6 xl:px-0 !py-0',
+    className
+  )}
 >
   {
     services.map((service) => (
       <a
-        class="max-w-80 shrink-0 snap-start scroll-mx-6 space-y-6 sm:max-w-96 md:max-w-lg"
+        class="dark:hover:bg-dark group relative max-w-80 shrink-0 snap-start scroll-mx-6 space-y-6 rounded-lg p-4 transition-colors duration-500 hover:bg-orange-100 sm:max-w-96 md:max-w-lg"
         href={getPermalink(service.permalink, 'services')}
       >
-        <Image src={service.images[0].src} alt={service.title} class="aspect-video h-64 max-w-md rounded-lg" />
+        <div class="overflow-hidden">
+          <Image
+            src={service.images[0].src}
+            alt={service.title}
+            class="aspect-video h-64 max-w-md rounded-lg transition-transform duration-500 group-hover:scale-110"
+          />
+        </div>
+        <div class="absolute right-6 top-0 flex h-8 w-14 justify-center rounded-full bg-primary opacity-0 transition-all duration-500 group-hover:opacity-100">
+          <Icon name="tabler:arrow-right" class="size-6 self-center text-white" />
+        </div>
         <h4>{service.title}</h4>
         <div class="flex flex-1 flex-row flex-wrap gap-4">
           {service.contents.map((content) => (
-            <div class="min-w-80 flex-1 space-y-2 line-clamp-5">
+            <div class="line-clamp-5 min-w-80 flex-1 space-y-2">
               <h4>{content.heading}</h4>
               {content.type === 'list' ? (
                 <ul class="list-disc">
@@ -40,7 +53,7 @@ const { services, className } = Astro.props;
                   {content.point.map((point) => (
                     <div class="flex items-center gap-2 rounded-lg border border-background bg-orange-700 px-4 py-2">
                       <div class="size-2 rounded-full bg-primary" />
-                      <p class="">{point}</p>
+                      <p class="text-background dark:text-foreground">{point}</p>
                     </div>
                   ))}
                 </div>

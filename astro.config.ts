@@ -97,7 +97,7 @@ export default defineConfig({
 
   env: {
     schema: {
-      DISCORD_WEBHOOK: envField.string({ context: 'server', access: 'secret', url: true }),
+      WHATSAPP_NUMBER: envField.string({ context: 'client', access: 'public' }),
     },
   },
 });

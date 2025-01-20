@@ -2,10 +2,9 @@ import { z } from 'astro/zod';
 import * as React from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 
-import { actions } from 'astro:actions';
-import { navigate } from 'astro:transitions/client';
+import { WHATSAPP_NUMBER } from 'astro:env/client';
 import { Button } from '@/components/ui/react/Button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/react/Dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/react/Dialog';
 import {
   Drawer,
   DrawerClose,
@@ -13,13 +12,20 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
 } from '@/components/ui/react/Drawer';
 import { Form, FormInput, useForm } from '@/components/ui/react/Form';
 
-export default function ContactDialog(props: { title: string }) {
+export default function ContactDialog() {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery('(min-width: 768px)');
+
+  React.useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const isModal = searchParams.get('contact-us');
+    if (isModal !== null) {
+      setOpen(true);
+    }
+  }, []);
 
   const title = 'Contact Us';
   const titleClassName = 'headline';
@@ -27,9 +33,6 @@ export default function ContactDialog(props: { title: string }) {
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button>{props.title}</Button>
-        </DialogTrigger>
         <DialogContent className="max-w-3xl p-20">
           <DialogHeader>
             <DialogTitle className={titleClassName}>{title}</DialogTitle>
@@ -42,9 +45,6 @@ export default function ContactDialog(props: { title: string }) {
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
-        <Button>{props.title}</Button>
-      </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
           <DrawerTitle className={titleClassName}>{title}</DrawerTitle>
@@ -80,11 +80,9 @@ function ContactUsForm() {
       <form
         className="space-y-4"
         onSubmit={handleSubmit(async (data) => {
-          const { error } = await actions.contact(data);
-          if (!error) {
-            alert('Thank you for contacting us!');
-            navigate('/');
-          }
+          const baseUrl = `https://wa.me/${WHATSAPP_NUMBER}`;
+          const message = `Halo Samarta! Saya ingin bertanya lebih lanjut:\n\n- *Name*: ${data.name}\n- *Company*: ${data.company}\n- *Email*: ${data.email}\n- *Phone*: ${data.phone}\n- *Message*: ${data.message}\n\nThank you!\n`;
+          window.open(`${baseUrl}?text=${encodeURIComponent(message)}`, '_blank');
         })}
       >
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

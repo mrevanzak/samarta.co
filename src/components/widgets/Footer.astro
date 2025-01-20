@@ -72,6 +72,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
                         class="inline-flex items-center rounded-lg p-2.5 text-sm hover:bg-primary/20 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700"
                         aria-label={ariaLabel}
                         href={href}
+                        target="_blank"
                       >
                         {icon && <Icon name={icon} class="h-5 w-5 text-primary" />}
                         <Fragment set:html={text} />
