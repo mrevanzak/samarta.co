@@ -1,8 +1,8 @@
 ---
+import Image from '@/components/common/Image.astro';
 import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
 import type { Project } from '@/types';
 import { getPermalink } from '@/utils/permalinks';
-import Image from '@/components/common/Image.astro';
 import { cn } from '@/utils/utils';
 
 type Props = {
@@ -24,7 +24,9 @@ const { project, reversed = false } = Astro.props;
     class="!aspect-square h-24 max-w-md flex-1 rounded-lg sm:!aspect-video sm:h-52 md:h-72"
   />
   <div class="w-full min-w-60 space-y-4 sm:w-5/12">
-    <h4>{project.title}</h4>
+    <a href={getPermalink(project.permalink, 'project')} class="hover:text-primary duration-200 transition-colors">
+      <h4>{project.title}</h4>
+    </a>
     <div class="line-clamp-3">
       <project.Content />
     </div>
