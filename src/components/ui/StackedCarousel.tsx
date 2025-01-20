@@ -27,17 +27,17 @@ const StackedCarouselTSX: React.FC<StackedCarouselProps> = ({ images }) => {
   return (
     <div className="relative flex w-full flex-col items-center">
       {/* Carousel Images */}
-      <div className="relative flex w-full left-28 bottom-28">
+      <div className="relative flex w-full left-20 bottom-56 md:left-28 md:bottom-28">
         {images.map((image, index) => (
           <div
             key={index}
             className={`absolute transition-transform duration-500 ease-in-out ${
               index === currentIndex
-                ? 'z-10 translate-x-0'
+                ? 'z-10 translate-x-0 brightness-105'
                 : index === (currentIndex + 1) % images.length
-                  ? 'z-0 translate-x-1/4 rotate-6 brightness-50'
+                  ? 'z-0 translate-x-1/4 rotate-6 brightness-50 scale-75'
                   : index === (currentIndex - 1 + images.length) % images.length
-                    ? 'z-0 -translate-x-1/4 -rotate-6 brightness-50'
+                    ? 'z-0 -translate-x-1/4 -rotate-6 brightness-50 scale-75'
                     : 'hidden'
             }`}
             onClick={
@@ -60,7 +60,7 @@ const StackedCarouselTSX: React.FC<StackedCarouselProps> = ({ images }) => {
             <img
               src={image.src}
               alt={image.alt || `Slide ${index + 1}`}
-              className="h-auto w-full rounded-lg shadow-lg !aspect-[2/3] !max-w-72 !object-cover"
+              className="rounded-lg shadow-lg aspect-[2/3] w-40 sm:w-52 md:w-72 object-cover hover:cursor-pointer"
             />
           </div>
         ))}
