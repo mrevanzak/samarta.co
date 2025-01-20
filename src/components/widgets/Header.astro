@@ -57,7 +57,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
     class:list={[
       'relative mx-auto w-full px-3 py-3 md:flex md:gap-10 md:px-6',
       {
-        'max-w-7xl': !isFullWidth,
+        'max-w-6xl': !isFullWidth,
       },
     ]}
   >
@@ -69,12 +69,14 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         <ToggleMenu />
       </div>
     </div>
-    <div class="flex flex-1 justify-between md:rounded-full md:bg-background md:p-4 2xl:p-2.5">
+    <div class="flex flex-1 justify-between md:rounded-full md:bg-background md:px-3 md:py-2 2xl:px-2">
       <nav
         class="mt-6 hidden overflow-y-auto overflow-x-hidden text-default md:mt-0 md:flex md:w-auto md:justify-self-center md:overflow-x-auto md:overflow-y-visible"
         aria-label="Main navigation"
       >
-        <ul class="h4 flex w-full flex-col gap-2 tracking-[0.01rem] md:w-auto md:flex-row md:justify-center">
+        <ul
+          class="h4 flex w-full flex-col gap-2 text-base tracking-[0.01rem] md:w-auto md:flex-row md:items-center md:justify-center"
+        >
           {
             links.map(({ text, href, links }) => (
               <li class={links?.length ? 'dropdown' : ''}>
