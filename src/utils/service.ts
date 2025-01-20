@@ -15,7 +15,7 @@ export function getServices(): Service[] {
   return [
     {
       title: 'Perencanaan Konstruksi',
-      images: [{ src: '@/assets/images/hero.png', alt: 'Service Image 1' }],
+      images: [{ src: 'hero.png', alt: 'Service Image 1' }, { src: 'hero-2.png', alt: 'Service Image 1' }, { src: 'hero-3.png', alt: 'Service Image 1' }],
       permalink: 'perencanaan-konstruksi',
       contents: [
         {
@@ -44,7 +44,7 @@ export function getServices(): Service[] {
     },
     {
       title: 'Perencanaan Tata Ruang',
-      images: [{ src: '@/assets/images/hero.png', alt: 'Service Image 1' }],
+      images: [{ src: 'hero.png', alt: 'Service Image 1' }, { src: 'hero.png', alt: 'Service Image 1' }, { src: 'hero.png', alt: 'Service Image 1' }],
 
       permalink: 'perencanaan-tata-ruang',
       contents: [
@@ -62,7 +62,7 @@ export function getServices(): Service[] {
     {
       title: 'Standar Harga dan RKBMD',
       permalink: 'standar-harga-dan-rkbmd',
-      images: [{ src: '@/assets/images/hero.png', alt: 'Service Image 1' }],
+      images: [{ src: 'hero.png', alt: 'Service Image 1' }, { src: 'hero.png', alt: 'Service Image 1' }, { src: 'hero.png', alt: 'Service Image 1' }],
       contents: [
         {
           heading: 'Ruang Lingkup',
@@ -84,7 +84,7 @@ export function getServices(): Service[] {
     },
     {
       title: 'Analisa Dampak Ruang',
-      images: [{ src: '@/assets/images/hero.png', alt: 'Service Image 1' }],
+      images: [{ src: 'hero.png', alt: 'Service Image 1' }, { src: 'hero.png', alt: 'Service Image 1' }, { src: 'hero.png', alt: 'Service Image 1' }],
       permalink: 'analisa-dampak-ruang',
       contents: [
         {
