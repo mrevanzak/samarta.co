@@ -53,6 +53,7 @@ const projectCollection = defineCollection({
 
     title: z.string(),
     images: z.array(z.string()).min(1),
+    logo: z.string().optional(),
     year: z.number(),
     spesifications: z.object({
       client: z.string(),

@@ -4,6 +4,7 @@ import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import Layout from '@/layouts/PageLayout.astro';
 import merge from 'lodash.merge';
 
+import Image from '@/components/common/Image.astro';
 import Headline from '@/components/ui/Headline.astro';
 import Hero from '@/components/widgets/Hero.astro';
 import ProjectsShowcase from '@/components/widgets/ProjectsShowcase.astro';
@@ -35,6 +36,8 @@ const otherProjects = (
     count: 4,
   })
 )?.filter((project) => project.permalink !== post.permalink);
+
+const logo = await findImage(post.logo);
 
 const metadata = merge(
   {
@@ -68,6 +71,7 @@ const metadata = merge(
           </div>
         ))
       }
+      <Image src={logo} alt={post.spesifications.location} class="flex-1" />
     </div>
     <div class="flex flex-col justify-between gap-2 md:flex-row">
       {
