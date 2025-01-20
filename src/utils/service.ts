@@ -16,9 +16,9 @@ export function getServices(): Service[] {
     {
       title: 'Perencanaan Konstruksi',
       images: [
-        { src: 'image 6.png', alt: 'Perencanaan Konstruksi' },
-        { src: 'jeriden-villegas-niSnhfMjiMI-unsplash.png', alt: 'Perencanaan Konstruksi 2' },
-        { src: 'glenov-brankovic-DWp5nUqTn6E-unsplash.png', alt: 'Perencanaan Konstruksi 3' },
+        { src: '/images/image 6.png', alt: 'Perencanaan Konstruksi' },
+        { src: '/images/jeriden-villegas-niSnhfMjiMI-unsplash.png', alt: 'Perencanaan Konstruksi 2' },
+        { src: '/images/glenov-brankovic-DWp5nUqTn6E-unsplash.png', alt: 'Perencanaan Konstruksi 3' },
       ],
       permalink: 'perencanaan-konstruksi',
       contents: [
@@ -49,9 +49,9 @@ export function getServices(): Service[] {
     {
       title: 'Perencanaan Tata Ruang',
       images: [
-        { src: 'image 5.png', alt: 'Perencanaan Tata Ruang' },
-        { src: 'tolu-olubode-PlBsJ5MybGc-unsplash 1.png', alt: 'Perencanaan Tata Ruang 2' },
-        { src: 'yuvraj-singh-vpy06JksHw8-unsplash 2.png', alt: 'Perencanaan Tata Ruang 3' },
+        { src: '/images/image 5.png', alt: 'Perencanaan Tata Ruang' },
+        { src: '/images/tolu-olubode-PlBsJ5MybGc-unsplash 1.png', alt: 'Perencanaan Tata Ruang 2' },
+        { src: '/images/yuvraj-singh-vpy06JksHw8-unsplash 2.png', alt: 'Perencanaan Tata Ruang 3' },
       ],
       permalink: 'perencanaan-tata-ruang',
       contents: [
@@ -70,9 +70,9 @@ export function getServices(): Service[] {
       title: 'Standar Harga dan RKBMD',
       permalink: 'standar-harga-dan-rkbmd',
       images: [
-        { src: 'anthony-tuil-5d2JJyEYKQ8-unsplash 1.png', alt: 'Standar Harga dan RKBMD' },
-        { src: 'ryan-ancill-nGsVMkRatgM-unsplash 1.png', alt: 'Standar Harga dan RKBMD 2' },
-        { src: 'aaron-lefler-ySZdYkPGEbs-unsplash 2.png', alt: 'Standar Harga dan RKBMD 3' },
+        { src: '/images/anthony-tuil-5d2JJyEYKQ8-unsplash 1.png', alt: 'Standar Harga dan RKBMD' },
+        { src: '/images/ryan-ancill-nGsVMkRatgM-unsplash 1.png', alt: 'Standar Harga dan RKBMD 2' },
+        { src: '/images/aaron-lefler-ySZdYkPGEbs-unsplash 2.png', alt: 'Standar Harga dan RKBMD 3' },
       ],
       contents: [
         {
@@ -96,9 +96,9 @@ export function getServices(): Service[] {
     {
       title: 'Analisa Dampak Ruang',
       images: [
-        { src: 'thisisengineering-zIL_CiC-bT0-unsplash 1.png', alt: 'Analisa Dampak Ruang' },
-        { src: 'chuttersnap-NMrUtSA7094-unsplash 2.png', alt: 'Analisa Dampak Ruang 2' },
-        { src: 'miguel-picq-gpX-8rCByMw-unsplash 2.png', alt: 'Analisa Damapak Ruang 3' },
+        { src: '/images/thisisengineering-zIL_CiC-bT0-unsplash 1.png', alt: 'Analisa Dampak Ruang' },
+        { src: '/images/chuttersnap-NMrUtSA7094-unsplash 2.png', alt: 'Analisa Dampak Ruang 2' },
+        { src: '/images/miguel-picq-gpX-8rCByMw-unsplash 2.png', alt: 'Analisa Damapak Ruang 3' },
       ],
       permalink: 'analisa-dampak-ruang',
       contents: [
