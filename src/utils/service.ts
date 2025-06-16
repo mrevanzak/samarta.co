@@ -23,8 +23,18 @@ export function getServices(): Service[] {
       permalink: 'perencanaan-konstruksi',
       contents: [
         {
-          heading: 'Ruang Lingkup',
+          heading: 'Design',
           type: 'list',
+          point: [
+            'Commercial Buildings',
+            'Perencanaan Desain Road and Bridge',
+            'Port, Airport, Industry Facility',
+            'Soil Improvement',
+          ],
+        },
+        {
+          heading: 'Ruang Lingkup',
+          type: 'badge',
           point: [
             'Masterplan Design',
             'Perencanaan Desain Arsitektural dan Perancangan Struktur',
@@ -32,16 +42,6 @@ export function getServices(): Service[] {
             'Detail Engineering Design (DED) dan Spesifikasi Teknis',
             'Manajemen Proyek Konstruksi',
             'Structure Assesment',
-          ],
-        },
-        {
-          heading: 'Design',
-          type: 'label',
-          point: [
-            'Commercial Buildings',
-            'Perencanaan Desain Road and Bridge',
-            'Port, Airport, Industry Facility',
-            'Soil Improvement',
           ],
         },
       ],
@@ -57,7 +57,7 @@ export function getServices(): Service[] {
       contents: [
         {
           heading: 'Ruang Lingkup',
-          type: 'list',
+          type: 'badge',
           point: [
             'Penyusunan Rencana Umum Tata Ruang yaitu Rencana Tata Ruang Wilayah (RTRW)',
             'Penyusunan Rencana Rinci Tata Ruang meliputi Rencana Detail Tata Ruang (RDTR), Rencana Tata Bangungan dan Lingkungan (RTBL), Rencana Tata Ruang Pulau/Kepulauan, Rencana Tata Ruang Kawasan Strategis (RTRKS), dan Rencana Rinci lain',
@@ -76,8 +76,13 @@ export function getServices(): Service[] {
       ],
       contents: [
         {
-          heading: 'Ruang Lingkup',
+          heading: 'Design',
           type: 'list',
+          point: ['SSH & SBU', 'HSPPK', 'ASB Fisik dan Non Fisik', 'SKBMD'],
+        },
+        {
+          heading: 'Ruang Lingkup',
+          type: 'badge',
           point: [
             'Penyusunan Manajemen Risiko (SOP)',
             'Penyusunan standarisasi komponen dan standarisasi harga',
@@ -85,11 +90,6 @@ export function getServices(): Service[] {
             'Penyusunan Rencana Kebutuhan Barang Milik Daerah',
             'Penyusunan kebijakan Peraturan Daerah mengenai Standar Harga Satuan dan Standar Kebutuhan Barang Milik Daerah',
           ],
-        },
-        {
-          heading: 'Design',
-          type: 'label',
-          point: ['SSH & SBU', 'HSPPK', 'ASB Fisik dan Non Fisik', 'SKBMD'],
         },
       ],
     },
@@ -104,7 +104,7 @@ export function getServices(): Service[] {
       contents: [
         {
           heading: 'Ruang Lingkup',
-          type: 'list',
+          type: 'badge',
           point: [
             'Penyusunan Kajian Lingkungan Hidup Strategis (KLHS)',
             'Penyusunan Dokumen Analisis Dampak Lingkungan (AMDAL)',

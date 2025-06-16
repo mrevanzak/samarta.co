@@ -8,7 +8,7 @@ export type Service = {
   permalink: string;
   contents: {
     heading: string;
-    type: 'list' | 'label';
+    type: 'badge' | 'list';
     point: string[];
   }[];
 };

@@ -1,63 +1,50 @@
 ---
 import StackedCarousel from '@/components/ui/StackedCarousel';
 import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
-import type { Image as ImageType } from '@/types';
+import type { Service } from '@/types';
 import { cn } from '@/utils/utils';
 
 type Props = {
-  title: string;
-  images: ImageType[];
-  contents: {
-    heading: string;
-    type: 'list' | 'label';
-    point: string[];
-  }[];
-  reversed?: boolean;
   className?: astroHTML.JSX.HTMLAttributes['class'];
   titleClassName?: astroHTML.JSX.HTMLAttributes['class'];
+  services: Array<Omit<Service, 'permalink'>>;
 };
 
-const { title, images, contents, reversed = false, className, titleClassName } = Astro.props;
+const { services, className, titleClassName } = Astro.props;
+let { title, images, contents } = services[0];
 ---
 
 <WidgetWrapper containerClass={cn('flex gap-8 flex-col !px-0 py-8 w-100vw', className)}>
-  <h1
-    class={cn(
-      'text-end layout',
-      {
-        'text-start': reversed,
-      },
-      titleClassName
-    )}
-  >
+  <h1 class={cn('text-center layout', titleClassName)}>
     {title}
   </h1>
-  <div class="bg-primary py-8 pt-64 sm:py-14 md:min-h-[26rem]">
-    <div class={cn('layout flex sm:flex-row flex-col gap-6', { 'sm:flex-row-reverse': reversed })}>
-      <div class="flex flex-1">
-        <StackedCarousel images={images} client:load />
-      </div>
+  <div class="mt-60 bg-primary py-8">
+    <div class={cn('layout flex -mt-56 items-center flex-col gap-6')}>
+      <StackedCarousel images={images} client:load />
       <div class="flex flex-1 flex-col space-y-12">
-        <div class="space-y-4">
+        <div class="space-y-10">
           {
             contents.map((content) => (
-              <div class="space-y-2 text-background dark:text-foreground">
-                <h4>{content.heading}</h4>
+              <div class="flex flex-col items-center space-y-4 text-background dark:text-foreground">
+                <h3>{content.heading}</h3>
                 {content.type === 'list' ? (
-                  <ul>
-                    {content.point.map((point) => (
-                      <li>• {point}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <div class="flex flex-wrap gap-4">
-                    {content.point.map((point) => (
-                      <div class="flex items-center gap-2 rounded-lg border border-background bg-orange-700 px-4 py-2">
-                        <div class="size-2 rounded-full bg-primary" />
-                        <p class="">{point}</p>
-                      </div>
+                  <div class="flex flex-row gap-3 rounded-lg border border-foreground bg-background/50 px-6 py-2 text-foreground">
+                    {content.point.map((point, index) => (
+                      <>
+                        <p class="font-bold md:text-lg">{point}</p>
+                        {index !== content.point.length - 1 && <div class="w-0.5 bg-foreground" />}
+                      </>
                     ))}
                   </div>
+                ) : (
+                  <ul class="flex flex-wrap justify-center gap-4 text-foreground">
+                    {content.point.map((point) => (
+                      <li class="flex items-center gap-2 rounded-lg border border-foreground bg-background/50 px-4 py-2">
+                        <div class="size-2 rounded-full bg-primary" />
+                        <p class="font-bold">{point}</p>
+                      </li>
+                    ))}
+                  </ul>
                 )}
               </div>
             ))

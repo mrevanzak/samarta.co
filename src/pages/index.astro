@@ -54,11 +54,8 @@ const services = getServices();
   <!-- Services Widget *************** -->
 
   <Headline title="Our Services" className="mt-24" />
-  {
-    services.map((service, index) => (
-      <Service title={service.title} images={service.images} contents={service.contents} reversed={index % 2 === 0} />
-    ))
-  }
+  <Service services={services} />
+  <!-- {services.map((service) => <Service title={service.title} images={service.images} contents={service.contents} />)} -->
 
   <!-- Projects Widget *************** -->
 
