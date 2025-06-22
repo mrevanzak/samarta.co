@@ -1,56 +1,18 @@
 ---
-import StackedCarousel from '@/components/ui/StackedCarousel';
+import ServiceNavigator from '@/components/ui/react/ServiceNavigator';
 import WidgetWrapper from '@/components/ui/WidgetWrapper.astro';
 import type { Service } from '@/types';
 import { cn } from '@/utils/utils';
 
 type Props = {
-  className?: astroHTML.JSX.HTMLAttributes['class'];
-  titleClassName?: astroHTML.JSX.HTMLAttributes['class'];
+  className?: string;
+  titleClassName?: string;
   services: Array<Omit<Service, 'permalink'>>;
 };
 
 const { services, className, titleClassName } = Astro.props;
-let { title, images, contents } = services[0];
 ---
 
 <WidgetWrapper containerClass={cn('flex gap-8 flex-col !px-0 py-8 w-100vw', className)}>
-  <h1 class={cn('text-center layout', titleClassName)}>
-    {title}
-  </h1>
-  <div class="mt-60 bg-primary py-8">
-    <div class={cn('layout flex -mt-56 items-center flex-col gap-6')}>
-      <StackedCarousel images={images} client:load />
-      <div class="flex flex-1 flex-col space-y-12">
-        <div class="space-y-10">
-          {
-            contents.map((content) => (
-              <div class="flex flex-col items-center space-y-4 text-background dark:text-foreground">
-                <h3>{content.heading}</h3>
-                {content.type === 'list' ? (
-                  <div class="flex flex-row gap-3 rounded-lg border border-foreground bg-background/50 px-6 py-2 text-foreground">
-                    {content.point.map((point, index) => (
-                      <>
-                        <p class="font-bold md:text-lg">{point}</p>
-                        {index !== content.point.length - 1 && <div class="w-0.5 bg-foreground" />}
-                      </>
-                    ))}
-                  </div>
-                ) : (
-                  <ul class="flex flex-wrap justify-center gap-4 text-foreground">
-                    {content.point.map((point) => (
-                      <li class="flex items-center gap-2 rounded-lg border border-foreground bg-background/50 px-4 py-2">
-                        <div class="size-2 rounded-full bg-primary" />
-                        <p class="font-bold">{point}</p>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-  </div>
+  <ServiceNavigator services={services} className={className} titleClassName={titleClassName} client:load />
 </WidgetWrapper>
