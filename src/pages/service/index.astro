@@ -35,17 +35,6 @@ const services = getServices();
   </Hero>
   <section class="layout my-8 space-y-8 lg:my-16">
     <Headline title="Our Services" className="mx-0" />
-    {
-      services.map((service, index) => (
-        <Service
-          title={service.title}
-          images={service.images}
-          contents={service.contents}
-          reversed={index % 2 === 0}
-          className={cn({ '!pt-0': index === 0 })}
-          titleClassName='mx-0'
-        />
-      ))
-    }
+    <Service services={services} />
   </section>
 </Layout>
